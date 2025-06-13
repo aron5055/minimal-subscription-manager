@@ -1,13 +1,7 @@
 import en from "@/assets/i18n/en.json";
 import zh from "@/assets/i18n/zh.json";
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type FC,
-  type ReactNode,
-} from "react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { createContext, useContext, type FC, type ReactNode } from "react";
 
 export type Lang = "en" | "zh";
 
@@ -24,15 +18,9 @@ const LangContext = createContext<{
 });
 
 export const I18nProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [lang, setLang] = useState<Lang>(() => {
-    const saved = localStorage.getItem("i18n");
-    if (saved === "zh" || saved === "en") return saved;
+  const [lang, setLang] = useLocalStorage<Lang>("i18n", () => {
     return navigator.language.startsWith("zh") ? "zh" : "en";
   });
-
-  useEffect(() => {
-    localStorage.setItem("i18n", lang);
-  }, [lang]);
 
   return (
     <LangContext.Provider value={{ t: resources[lang], setLang }}>

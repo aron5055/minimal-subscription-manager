@@ -9,7 +9,7 @@
         "label": "URL",
         "placeholder": "Enter the website to auto-fetch the icon"
       },
-      "currencyCode": "Currency",
+      "currencyCode": "USD",
       "notes": "Notes",
       "date": "Start Date",
       "cycle": {
@@ -37,8 +37,8 @@
     "lang": {
       "label": "Language",
       "eng": "English",
-      "cn": "Chinese"
+      "cn": "中文"
     },
-    "reset": "️Reset All Data"
+    "reset": "Reset All Data"
   }
 }

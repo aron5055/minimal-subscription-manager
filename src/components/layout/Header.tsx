@@ -1,5 +1,5 @@
 import { useI18n } from "@/contexts/LangContext";
-import SettingDropDown from "@/features/settings/settingDropDown";
+import SettingDropDown from "@/features/settings/SettingDropDown";
 
 export default function Header() {
   const { t } = useI18n();

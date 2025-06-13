@@ -8,16 +8,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useCurrency } from "@/contexts/CurrencyContext";
 import { useI18n } from "@/contexts/LangContext";
 import getSymbolFromCurrency from "currency-symbol-map";
 import { useState } from "react";
 
 export default function CurrencyPicker() {
   const { t } = useI18n();
-  const [currency, setCurrency] = useState(t.subscription.form.currencyCode);
+  const { currency } = useCurrency();
+  const [subsCurrency, setSubsCurrency] = useState(
+    currency !== "" ? currency : t.subscription.form.currencyCode,
+  );
 
   return (
-    <Select value={currency} onValueChange={setCurrency}>
+    <Select value={subsCurrency} onValueChange={setSubsCurrency}>
       <SelectTrigger className="w-1/3 justify-center flex relative items-center">
         <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>

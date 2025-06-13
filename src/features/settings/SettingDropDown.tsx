@@ -17,12 +17,14 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useCurrency } from "@/contexts/CurrencyContext";
 import { useI18n } from "@/contexts/LangContext";
 import getSymbolFromCurrency from "currency-symbol-map";
 import { DollarSign, Download, Globe, Settings, Upload } from "lucide-react";
 
 export default function SettingDropDown() {
   const { t, setLang } = useI18n();
+  const { setCurrency } = useCurrency();
 
   return (
     <DropdownMenu>
@@ -53,7 +55,11 @@ export default function SettingDropDown() {
                 <CommandInput />
                 <CommandList>
                   {codes.map((code) => (
-                    <CommandItem key={code} value={code}>
+                    <CommandItem
+                      key={code}
+                      value={code}
+                      onSelect={() => setCurrency(code)}
+                    >
                       {`(${getSymbolFromCurrency(code)}) ${code}`}
                     </CommandItem>
                   ))}
