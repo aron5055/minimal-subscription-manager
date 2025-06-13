@@ -1,0 +1,44 @@
+{
+  "title": "Minimal Subscription Manager",
+  "subscription": {
+    "label": "Add Subscription",
+    "description": "Subscription Details",
+    "form": {
+      "title": "Name",
+      "url": {
+        "label": "URL",
+        "placeholder": "Enter the website to auto-fetch the icon"
+      },
+      "currencyCode": "Currency",
+      "notes": "Notes",
+      "date": "Start Date",
+      "cycle": {
+        "label": "Payment Cycle",
+        "group": [
+          { "label": "Monthly", "value": "monthly" },
+          { "label": "Yearly", "value": "yearly" },
+          { "label": "Other", "value": "other" }
+        ]
+      },
+      "fee": "Subscription Fee",
+      "color": "Background Color",
+      "preset": {
+        "label": "Preset",
+        "description": "Select a preset"
+      },
+      "submit": "Save"
+    }
+  },
+  "settings": {
+    "label": "Settings",
+    "importData": "Import Data",
+    "exportData": "Export Data",
+    "defaultCurrency": "Default Currency",
+    "lang": {
+      "label": "Language",
+      "eng": "English",
+      "cn": "Chinese"
+    },
+    "reset": "️Reset All Data"
+  }
+}
