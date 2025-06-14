@@ -32,7 +32,7 @@ export function DatePickerDemo() {
           {date ? format(date, "P") : ""}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
+      <PopoverContent className="w-auto px-4 py-2" align="start">
         <Calendar
           mode="single"
           selected={date}

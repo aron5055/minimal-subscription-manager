@@ -1,4 +1,3 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,22 +11,54 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
 import { useI18n } from "@/contexts/LangContext";
-import { useFavicon } from "@/hooks/useFavicon";
+import type { BuiltinIcon } from "@/lib/genericIcons";
+import { getFaviconUrl } from "@/lib/utils";
+import type { Icon } from "@/types/types";
 import { useState } from "react";
 import { IoAdd } from "react-icons/io5";
+import AvatarPicker from "./AvatarPicker";
 import BillingCycleField from "./BillingCycleField";
 import ColorPicker from "./ColorPicker";
 import CurrencyPicker from "./CurrencyPicker";
 import { DatePickerDemo } from "./DatePicker";
 import PresetPicker from "./PresetPicker";
+import UrlField from "./UrlField";
+
+function getTextIcon(text: string): Icon {
+  return text.trim() ? { type: "text", text } : { type: "empty" };
+}
 
 export default function SubsDialog() {
   const { t } = useI18n();
-  const [name, setName] = useState("");
-  const [url, setUrl] = useState("");
   const [open, setOpen] = useState(false);
-  const favicon = useFavicon(url);
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [icon, setIcon] = useState<Icon>({ type: "empty" });
+
+  const handleTitleChange = (value: string) => {
+    setTitle(value);
+    if (icon.type === "empty" || icon.type === "text") {
+      setIcon(getTextIcon(value));
+    }
+  };
+
+  const handleChangeIcon = (name: BuiltinIcon) => {
+    if (name === "none") {
+      setIcon(getTextIcon(title));
+    } else {
+      setIcon({ type: "builtin", name });
+    }
+  };
+
+  const handleCheckedChange = (checked: boolean) => {
+    if (checked) {
+      setIcon({ type: "favicon", url: getFaviconUrl(url) });
+    } else {
+      setIcon(getTextIcon(title));
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -36,8 +67,16 @@ export default function SubsDialog() {
           <IoAdd />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
+      <DialogContent
+        className="
+        p-0 w-[90vw] rounded-lg
+        left-1/2 -translate-x-1/2
+        top-[5svh] translate-y-0 
+        sm:top-1/2 sm:-translate-y-1/2
+        max-h-[90svh] overflow-y-auto flex flex-col
+        "
+      >
+        <DialogHeader className="shrink-0 px-6 pt-6 pb-4">
           <DialogTitle className="text-center">
             {t.subscription.label}
           </DialogTitle>
@@ -46,52 +85,53 @@ export default function SubsDialog() {
           </DialogDescription>
         </DialogHeader>
         <Separator />
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-3 items-center">
-            <Avatar className="size-16">
-              <AvatarImage src={favicon} alt="icon" />
-              <AvatarFallback>{name.slice(0, 2).toUpperCase()}</AvatarFallback>
-            </Avatar>
-            <PresetPicker />
-            <CurrencyPicker />
-            <Label htmlFor="fee" className="sr-only">
-              {t.subscription.form.fee}
-            </Label>
-            <Input id="fee" className="w-1/3 text-center" placeholder="0.00" />
-          </div>
-          <Label htmlFor="title">{t.subscription.form.title}</Label>
-          <Input
-            id="title"
-            value={name}
-            onChange={(evt) => setName(evt.target.value)}
-            spellCheck={false}
-          />
-          <Label htmlFor="url">{t.subscription.form.url.label}</Label>
-          <Input
-            id="url"
-            value={url}
-            onChange={(evt) => setUrl(evt.target.value)}
-            placeholder={t.subscription.form.url.placeholder}
-          />
-          <Label htmlFor="notes">{t.subscription.form.notes}</Label>
-          <Input id="notes" />
-          <div className="flex items-center justify-between">
-            <span className="font-medium text-sm">
-              {t.subscription.form.cycle.label}
-            </span>
-            <BillingCycleField />
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="font-medium text-sm">
-              {t.subscription.form.date}
-            </span>
-            <DatePickerDemo />
-          </div>
-        </div>
+        <section className="flex-1 overflow-y-auto flex justify-center px-6">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3 items-center">
+              <AvatarPicker icon={icon} changeIcon={handleChangeIcon} />
+              <PresetPicker />
+              <CurrencyPicker />
+              <Label htmlFor="fee" className="sr-only">
+                {t.subscription.form.fee}
+              </Label>
+              <Input
+                id="fee"
+                className="w-1/3 text-center"
+                placeholder="0.00"
+              />
+            </div>
+            <Label htmlFor="title">{t.subscription.form.title}</Label>
+            <Input
+              id="title"
+              value={title}
+              onChange={(evt) => handleTitleChange(evt.target.value)}
+              spellCheck={false}
+            />
+            <UrlField
+              url={url}
+              setUrl={setUrl}
+              handleCheckedChange={handleCheckedChange}
+            />
 
-        <ColorPicker onChange={(color) => {}} />
+            <Label htmlFor="notes">{t.subscription.form.notes}</Label>
+            <Textarea id="notes" />
+            <div className="flex items-center justify-between">
+              <span className="font-medium text-sm">
+                {t.subscription.form.cycle.label}
+              </span>
+              <BillingCycleField />
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="font-medium text-sm mr-10">
+                {t.subscription.form.date}
+              </span>
+              <DatePickerDemo />
+            </div>
+            <ColorPicker onChange={(color) => {}} />
+          </div>
+        </section>
         <Separator />
-        <DialogFooter>
+        <DialogFooter className="shrink-0 px-6 py-4">
           <Button>{t.subscription.form.submit}</Button>
         </DialogFooter>
       </DialogContent>

@@ -7,7 +7,12 @@
       "title": "名称",
       "url": {
         "label": "链接",
-        "placeholder": "填写网址后可以自动获取图标"
+        "placeholder": "点击右侧按钮以获取图标"
+      },
+      "icon": {
+        "label": "图标",
+        "description": "选择图标",
+        "clear": "清除图标"
       },
       "currencyCode": "CNY",
       "notes": "备注",
