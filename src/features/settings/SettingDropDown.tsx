@@ -37,11 +37,11 @@ export default function SettingDropDown() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Upload />
+          <Download />
           {t.settings.importData}
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Download />
+          <Upload />
           {t.settings.exportData}
         </DropdownMenuItem>
         <DropdownMenuSub>

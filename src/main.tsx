@@ -4,15 +4,18 @@ import { Toaster } from "sonner";
 import App from "./App.tsx";
 import { CurrencyProvider } from "./contexts/CurrencyContext.tsx";
 import { I18nProvider } from "./contexts/LangContext.tsx";
+import { SubsProvider } from "./contexts/SubsContext.tsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <I18nProvider>
-      <CurrencyProvider>
-        <App />
-        <Toaster />
-      </CurrencyProvider>
+      <SubsProvider>
+        <CurrencyProvider>
+          <App />
+          <Toaster />
+        </CurrencyProvider>
+      </SubsProvider>
     </I18nProvider>
   </StrictMode>,
 );

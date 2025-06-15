@@ -26,7 +26,10 @@
         ]
       },
       "fee": "订阅费用",
-      "color": "背景色",
+      "color": {
+        "label": "背景色",
+        "input": "输入颜色-16进制"
+      },
       "preset": {
         "label": "预设配置",
         "description": "选择预设配置"

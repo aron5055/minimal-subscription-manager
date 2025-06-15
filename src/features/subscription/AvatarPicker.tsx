@@ -13,9 +13,9 @@ import { Separator } from "@/components/ui/separator";
 import { useI18n } from "@/contexts/LangContext";
 import { GenericIcons, type BuiltinIcon } from "@/lib/genericIcons";
 import { renderIcon } from "@/lib/renderIcon";
-import { cn } from "@/lib/utils";
 import type { Icon } from "@/types/types";
 import { useState } from "react";
+
 interface AvatarPickerProps {
   icon: Icon;
   changeIcon: (icon: BuiltinIcon) => void;
@@ -64,10 +64,7 @@ export default function AvatarPicker({ icon, changeIcon }: AvatarPickerProps) {
               <Button
                 key={name}
                 variant="ghost"
-                className={cn(
-                  "h-16 rounded-xl w-full [&_svg]:size-6",
-                  "focus-visible:ring-2",
-                )}
+                className="h-16 rounded-xl w-full [&_svg]:size-6 focus-visible:ring-2"
                 onClick={() => handleChangeIcon(name as BuiltinIcon)}
               >
                 <Icon />
@@ -80,10 +77,7 @@ export default function AvatarPicker({ icon, changeIcon }: AvatarPickerProps) {
           <Button
             variant="destructive"
             className="w-full mb-3"
-            onClick={() => {
-              changeIcon("none");
-              setOpen(false);
-            }}
+            onClick={() => handleChangeIcon("none")}
           >
             {t.subscription.form.icon.clear}
           </Button>

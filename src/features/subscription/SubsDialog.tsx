@@ -30,12 +30,26 @@ function getTextIcon(text: string): Icon {
   return text.trim() ? { type: "text", text } : { type: "empty" };
 }
 
+type FormType = {
+  title: string;
+  url: string;
+  currency: string;
+  price: number;
+  notes: string;
+  cycle: "month" | "year" | "other";
+  date: Date;
+};
+
 export default function SubsDialog() {
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [icon, setIcon] = useState<Icon>({ type: "empty" });
+  const [state, setState] = useState({
+    title: "",
+    url: "",
+  });
 
   const handleTitleChange = (value: string) => {
     setTitle(value);

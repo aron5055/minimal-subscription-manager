@@ -12,7 +12,14 @@ export type Icon =
   | { type: "text"; text: string }
   | { type: "empty" };
 
+export interface Category {
+  id: string;
+  name: string;
+  // color?: string
+}
+
 export interface Subscription {
+  id: string;
   title: string;
   price: number;
   currencyCode: string;
@@ -22,6 +29,11 @@ export interface Subscription {
   color: string;
   startDate: string;
   cycle: "month" | "year" | "other";
-  tags: Tag[];
+  categoryId: string;
   status: "active" | "paused";
+}
+
+export interface State {
+  subs: Subscription[];
+  cats: Record<string, Category>;
 }
