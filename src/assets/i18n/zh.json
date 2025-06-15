@@ -2,7 +2,7 @@
   "title": "极简订阅管理",
   "subscription": {
     "label": "添加订阅",
-    "description": "订阅详情",
+    "description": "请填写订阅详情",
     "form": {
       "title": "名称",
       "url": {
@@ -17,6 +17,10 @@
       "currencyCode": "CNY",
       "notes": "备注",
       "date": "订阅开始日期",
+      "category": {
+        "label": "编辑分类",
+        "description": "选择已有分类或者创建新分类"
+      },
       "cycle": {
         "label": "付款周期",
         "group": [

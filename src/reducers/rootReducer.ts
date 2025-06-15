@@ -10,7 +10,8 @@ export type Action =
   | { type: "ADD_CAT"; cat: Category }
   | { type: "RENAME_CAT"; id: string; name: string }
   | { type: "DELETE_CAT"; id: string }
-  | { type: "RESET_CAT" };
+  | { type: "RESET_CAT" }
+  | { type: "HYDRATE_STATE"; payload: State };
 
 function subReducer(subs: Subscription[], a: Action) {
   switch (a.type) {
@@ -58,7 +59,12 @@ function catReducer(
 }
 
 export default function rootReducer(state: State, a: Action) {
+  if (a.type === "HYDRATE_STATE") {
+    return a.payload;
+  }
+
   const subs = subReducer(state.subs, a);
   const cats = catReducer(state.cats, a, subs);
+
   return state.subs === subs && state.cats === cats ? state : { subs, cats };
 }

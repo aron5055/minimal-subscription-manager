@@ -24,7 +24,7 @@ export function DatePickerDemo() {
         <Button
           variant="outline"
           className={cn(
-            "w-[240px] justify-start text-left font-normal",
+            "w-2/3 justify-start text-left font-normal",
             !date && "text-muted-foreground",
           )}
         >
@@ -37,7 +37,9 @@ export function DatePickerDemo() {
           mode="single"
           selected={date}
           onSelect={setDate}
+          captionLayout="dropdown"
           initialFocus
+          required
         />
       </PopoverContent>
     </Popover>

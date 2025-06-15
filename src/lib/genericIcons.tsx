@@ -60,6 +60,6 @@ export const GenericIcons = {
   alerts: Bell,
   favorite: Star,
   energy: Zap,
-} satisfies Record<string, React.FC<SVGProps<SVGSVGElement>>>;
+} as const satisfies Record<string, React.FC<SVGProps<SVGSVGElement>>>;
 
 export type BuiltinIcon = keyof typeof GenericIcons;

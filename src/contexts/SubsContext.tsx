@@ -6,6 +6,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useMemo,
   useReducer,
   type FC,
   type ReactNode,
@@ -33,6 +34,14 @@ export const SubsProvider: FC<{ children: ReactNode }> = ({ children }) => {
   );
 };
 
-export function useSubs() {
+export function useSubscription() {
   return useContext(SubsContext);
+}
+
+export function useAllCats() {
+  const [{ cats }] = useSubscription();
+  return useMemo(
+    () => Object.values(cats).sort((a, b) => a.name.localeCompare(b.name)),
+    [cats],
+  );
 }
