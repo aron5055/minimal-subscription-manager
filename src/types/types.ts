@@ -1,4 +1,6 @@
-import { GenericIcons } from "@/lib/genericIcons";
+import { generateSoftColor } from "@/lib/utils";
+import { GenericIcons } from "@/utils/genericIcons";
+import { nanoid } from "nanoid";
 import { z } from "zod/v4";
 
 export const builtinNameSchema = z.enum(
@@ -10,7 +12,7 @@ export const builtinNameSchema = z.enum(
 
 export type BuiltinIcon = keyof typeof GenericIcons;
 
-const iconSchema = z.discriminatedUnion("type", [
+export const iconSchema = z.discriminatedUnion("type", [
   z.object({ type: z.literal("favicon"), url: z.url() }),
   z.object({ type: z.literal("builtin"), name: builtinNameSchema }),
   z.object({ type: z.literal("text"), text: z.string() }),
@@ -26,19 +28,27 @@ const categorySchema = z.object({
 
 export type Category = z.infer<typeof categorySchema>;
 
-const subSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  price: z.number().nonnegative().multipleOf(0.01),
+export const cycleSchema = z.object({
+  num: z.int().positive(),
+  type: z.enum(["day(s)", "month(s)", "year(s)"]),
+});
+
+export type CycleType = z.infer<typeof cycleSchema>;
+
+export const subSchema = z.object({
+  id: z.string().default(() => nanoid(10)),
+  title: z.string().default(""),
+  price: z.number().nonnegative().multipleOf(0.01).default(0.0),
   currencyCode: z.string().length(3),
-  icon: iconSchema,
-  url: z.url().optional(),
-  notes: z.string().optional(),
-  color: z.string(),
-  startDate: z.iso.datetime(),
-  cycle: z.enum(["month", "year", "other"]),
-  categoryId: z.string(),
-  status: z.enum(["active", "paused"]),
+  icon: iconSchema.default({ type: "empty" }),
+  url: z.url().optional().or(z.literal("")).default(""),
+  notes: z.string().default(""),
+  color: z.string().default(generateSoftColor),
+  startDate: z.iso.date(),
+  endDate: z.iso.date().nullable().default(null),
+  cycle: cycleSchema.default({ num: 1, type: "month(s)" }),
+  categoryId: z.string().default(""),
+  status: z.enum(["active", "paused"]).default("active"),
 });
 
 export type Subscription = z.infer<typeof subSchema>;

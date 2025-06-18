@@ -10,7 +10,7 @@ const CurrencyContext = createContext<{
 });
 
 export const CurrencyProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [currency, setCurrency] = useLocalStorage("currency", "");
+  const [currency, setCurrency] = useLocalStorage("currency", "USD");
 
   return (
     <CurrencyContext.Provider value={{ currency, setCurrency }}>

@@ -1,21 +1,22 @@
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getFaviconUrl } from "@/lib/utils";
 import type { Icon } from "@/types/types";
-import { GenericIcons } from "./genericIcons";
+import { GenericIcons } from "../utils/genericIcons";
 
 export function renderIcon(icon: Icon) {
   switch (icon.type) {
     case "favicon":
       return (
         <>
-          <AvatarImage src={icon.url} alt="icon" />
+          <AvatarImage src={getFaviconUrl(icon.url)} alt="icon" />
           <AvatarFallback />
         </>
       );
     case "builtin": {
       const Builtin = GenericIcons[icon.name];
       return (
-        <AvatarFallback className="flex justify-center items-center">
-          <Builtin className="w-6 h-6" />
+        <AvatarFallback>
+          <Builtin style={{ width: "32px", height: "32px" }} />
         </AvatarFallback>
       );
     }

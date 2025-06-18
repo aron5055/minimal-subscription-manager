@@ -15,7 +15,9 @@ export default function PresetPicker() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-1/3">{t.subscription.form.preset.label}</Button>
+        <Button variant="outline" className="w-1/3">
+          {t.subscription.form.preset.label}
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

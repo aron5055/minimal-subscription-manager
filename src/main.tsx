@@ -7,6 +7,11 @@ import { I18nProvider } from "./contexts/LangContext.tsx";
 import { SubsProvider } from "./contexts/SubsContext.tsx";
 import "./index.css";
 
+// 在开发模式下加载开发工具
+if (import.meta.env.DEV) {
+  import("./utils/devTools");
+}
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <I18nProvider>

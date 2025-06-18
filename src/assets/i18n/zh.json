@@ -7,32 +7,35 @@
       "title": "名称",
       "url": {
         "label": "链接",
-        "placeholder": "点击右侧按钮以获取图标"
+        "placeholder": "勾选右侧以获取图标"
       },
       "icon": {
         "label": "图标",
         "description": "选择图标",
         "clear": "清除图标"
       },
-      "currencyCode": "CNY",
+      "currency": "搜索币种",
       "notes": "备注",
-      "date": "订阅开始日期",
+      "date": {
+        "start": "订阅开始日期",
+        "end": "订阅结束日期"
+      },
       "category": {
         "label": "编辑分类",
         "description": "选择已有分类或者创建新分类"
       },
       "cycle": {
         "label": "付款周期",
-        "group": [
-          { "label": "月付", "value": "monthly" },
-          { "label": "年付", "value": "yearly" },
-          { "label": "其他", "value": "other" }
+        "type": [
+          { "label": "天", "value": "day(s)" },
+          { "label": "月", "value": "month(s)" },
+          { "label": "年", "value": "year(s)" }
         ]
       },
-      "fee": "订阅费用",
+      "price": "开销",
       "color": {
         "label": "背景色",
-        "input": "输入颜色-16进制"
+        "input": "输入颜色(16进制)"
       },
       "preset": {
         "label": "预设配置",
@@ -52,5 +55,8 @@
       "cn": "中文"
     },
     "reset": "️重置所有数据"
+  },
+  "error": {
+    "endAfter": "结束日期必须在开始日期之后或留空"
   }
 }

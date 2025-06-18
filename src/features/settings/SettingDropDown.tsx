@@ -40,8 +40,10 @@ export default function SettingDropDown() {
       const text = await file.text();
       const parsed = exportBlobSchema.parse(JSON.parse(text));
       dispatch({ type: "HYDRATE_STATE", payload: parsed.data });
+      // TODO: better prompts
       toast.success("success");
     } catch (e) {
+      // TODO: better prompts
       toast.error("error");
     } finally {
       fileRef.current!.value = "";
@@ -50,6 +52,7 @@ export default function SettingDropDown() {
 
   return (
     <>
+      {/**TODO: abstraction */}
       <DropdownMenu>
         <DropdownMenuTrigger className="focus:outline-none">
           <Settings size={24} />

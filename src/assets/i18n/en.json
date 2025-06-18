@@ -9,7 +9,6 @@
         "label": "URL",
         "placeholder": "Enter the website to auto-fetch the icon"
       },
-      "currencyCode": "USD",
       "notes": "Notes",
       "date": "Start Date",
       "cycle": {
