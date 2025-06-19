@@ -57,6 +57,22 @@
     },
     "reset": "️重置所有数据"
   },
+  "analyse": {
+    "label": "数据分析",
+    "description": "提供年月开销统计",
+    "monthly": "本月统计",
+    "yearly": "本年统计",
+    "tabs": {
+      "monthly": "月度统计",
+      "yearly": "年度统计"
+    },
+    "noData": "暂无数据",
+    "totalSpent": "总支出",
+    "uncategorized": "未分类"
+  },
+  "common": {
+    "close": "关闭"
+  },
   "error": {
     "endAfter": "结束日期必须在开始日期之后或留空"
   }

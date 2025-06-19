@@ -129,54 +129,49 @@ export function getTextColorForBackground(backgroundColor: string): string {
 
 export function generateSoftColor() {
   const hue = Math.floor(Math.random() * 360);
-  const saturation = Math.floor(Math.random() * 26) + 50; // 范围 50-75
-  const lightness = Math.floor(Math.random() * 11) + 85; // 范围 85-95
+  const saturation = Math.floor(Math.random() * 21) + 40; // 范围在 40-60之间
+  const lightness = Math.floor(Math.random() * 15) + 40;
 
-  // Convert HSL to RGB
-  const h = hue / 360;
   const s = saturation / 100;
   const l = lightness / 100;
-
   const c = (1 - Math.abs(2 * l - 1)) * s;
-  const x = c * (1 - Math.abs(((h * 6) % 2) - 1));
+  const x = c * (1 - Math.abs(((hue / 60) % 2) - 1));
   const m = l - c / 2;
-
   let r = 0,
     g = 0,
     b = 0;
 
-  if (0 <= h && h < 1 / 6) {
+  if (0 <= hue && hue < 60) {
     r = c;
     g = x;
     b = 0;
-  } else if (1 / 6 <= h && h < 2 / 6) {
+  } else if (60 <= hue && hue < 120) {
     r = x;
     g = c;
     b = 0;
-  } else if (2 / 6 <= h && h < 3 / 6) {
+  } else if (120 <= hue && hue < 180) {
     r = 0;
     g = c;
     b = x;
-  } else if (3 / 6 <= h && h < 4 / 6) {
+  } else if (180 <= hue && hue < 240) {
     r = 0;
     g = x;
     b = c;
-  } else if (4 / 6 <= h && h < 5 / 6) {
+  } else if (240 <= hue && hue < 300) {
     r = x;
     g = 0;
     b = c;
-  } else if (5 / 6 <= h && h < 1) {
+  } else if (300 <= hue && hue < 360) {
     r = c;
     g = 0;
     b = x;
   }
 
-  // Convert to 0-255 range and round
   r = Math.round((r + m) * 255);
   g = Math.round((g + m) * 255);
   b = Math.round((b + m) * 255);
 
-  // Convert to hexadecimal
-  const toHex = (n: number) => n.toString(16).padStart(2, "0");
+  const toHex = (c: number) => ("0" + c.toString(16)).slice(-2);
+
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
