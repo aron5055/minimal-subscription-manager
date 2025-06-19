@@ -178,7 +178,7 @@ export default function SubsForm({
                           url: field.value ?? "",
                         });
                       } else {
-                        form.setValue("icon", { type: "empty" });
+                        form.setValue("icon", clearIcon());
                       }
                     }}
                   />

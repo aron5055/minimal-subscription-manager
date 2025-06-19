@@ -29,7 +29,6 @@ export default function SubsDialog({
   );
 
   const onSubmit = (values: Subscription) => {
-    console.log("Submitted values:", values);
     if (mode === "add") {
       dispatch({ type: "ADD_SUB", payload: values });
     } else if (mode === "edit") {

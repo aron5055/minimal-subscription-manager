@@ -26,7 +26,10 @@ function getRootDomain(urlStr: string): string {
 
 export function getFaviconUrl(urlStr: string): string {
   const root = getRootDomain(urlStr);
-  return root ? `https://www.google.com/s2/favicons?domain=${root}&sz=128` : "";
+  // return root ? `https://www.google.com/s2/favicons?domain=${root}&sz=128` : "";
+  return root
+    ? `https://favicons.fuzqing.workers.dev/api/getFavicon?url=https://${root}&size=128`
+    : "";
 }
 
 export function exportData(state: State) {
