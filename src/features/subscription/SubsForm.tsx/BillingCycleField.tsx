@@ -42,7 +42,7 @@ const BillingCycleField = forwardRef<HTMLInputElement, BillingCycleFieldProps>(
             onChange({ ...value, type })
           }
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger>
             <SelectValue />
           </SelectTrigger>
           <SelectContent>

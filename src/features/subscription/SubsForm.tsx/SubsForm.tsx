@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
@@ -12,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useI18n } from "@/contexts/LangContext";
-import type { Subscription } from "@/types/types";
+import type { Icon, Subscription } from "@/types/types";
 import makeFormSchema from "@/utils/makeFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { parseISO } from "date-fns";
@@ -29,9 +28,14 @@ import PresetPicker from "./PresetPicker";
 interface SubsFormProps {
   sub?: Subscription;
   onSubmit: SubmitHandler<Subscription>;
+  formId?: string;
 }
 
-export default function SubsForm({ sub, onSubmit }: SubsFormProps) {
+export default function SubsForm({
+  sub,
+  onSubmit,
+  formId = "subscription-form",
+}: SubsFormProps) {
   const { currency } = useCurrency();
   const { t } = useI18n();
   const schema = useMemo(() => makeFormSchema(currency, t), [currency, t]);
@@ -41,14 +45,27 @@ export default function SubsForm({ sub, onSubmit }: SubsFormProps) {
     defaultValues: defaults,
   });
 
-  const clearIcon = () => {
-    if (form.getValues("title")) {
+  const clearIcon: () => Icon = () => {
+    const text = form.getValues("title");
+    if (text) {
+      return { type: "text", text };
+    } else {
+      return { type: "empty" };
     }
+  };
+
+  const setIcon = (text: string) => {
+    const icon = form.getValues("icon");
+    if (icon?.type === "favicon" || icon?.type === "builtin") {
+      return;
+    }
+    form.setValue("icon", { type: "text", text });
   };
 
   return (
     <Form {...form}>
       <form
+        id={formId}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6 w-full max-w-md mx-auto md:w-[90%]"
       >
@@ -64,7 +81,11 @@ export default function SubsForm({ sub, onSubmit }: SubsFormProps) {
                     {t.subscription.form.icon.label}
                   </FormLabel>
                   <FormControl>
-                    <AvatarPicker {...field} value={field.value!} />
+                    <AvatarPicker
+                      {...field}
+                      value={field.value!}
+                      clearIcon={clearIcon}
+                    />
                   </FormControl>
                 </FormItem>
               )}
@@ -120,7 +141,14 @@ export default function SubsForm({ sub, onSubmit }: SubsFormProps) {
               <FormItem>
                 <FormLabel>{t.subscription.form.title}</FormLabel>
                 <FormControl>
-                  <Input {...field} spellCheck={false} />
+                  <Input
+                    {...field}
+                    spellCheck={false}
+                    onChange={(e) => {
+                      form.setValue("title", e.target.value);
+                      setIcon(e.target.value);
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -277,10 +305,6 @@ export default function SubsForm({ sub, onSubmit }: SubsFormProps) {
             </FormItem>
           )}
         />
-
-        <Button type="submit" className="w-full mt-6">
-          {t.subscription.form.submit}
-        </Button>
       </form>
     </Form>
   );

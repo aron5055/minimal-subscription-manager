@@ -1,7 +1,8 @@
 {
   "title": "极简订阅管理",
   "subscription": {
-    "label": "添加订阅",
+    "add": "添加订阅",
+    "edit": "编辑订阅",
     "description": "请填写订阅详情",
     "form": {
       "title": "名称",

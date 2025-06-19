@@ -16,14 +16,16 @@ export function renderIcon(icon: Icon) {
       const Builtin = GenericIcons[icon.name];
       return (
         <AvatarFallback>
-          <Builtin style={{ width: "32px", height: "32px" }} />
+          <Builtin style={{ width: "30px", height: "30px" }} />
         </AvatarFallback>
       );
     }
 
     case "text":
       return (
-        <AvatarFallback>{icon.text.slice(0, 2).toUpperCase()}</AvatarFallback>
+        <AvatarFallback className="text-xl">
+          {icon.text.slice(0, 2).toUpperCase()}
+        </AvatarFallback>
       );
 
     case "empty":

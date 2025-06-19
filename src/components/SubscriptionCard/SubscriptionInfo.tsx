@@ -7,7 +7,14 @@ import { Avatar } from "../ui/avatar";
 export default function SubscriptionInfo({ sub }: { sub: Subscription }) {
   return (
     <div className="flex items-center min-w-0 flex-1">
-      <Avatar className="size-12 sm:size-14 lg:size-16 mr-3 flex-shrink-0 text-black">
+      <Avatar
+        className="size-12 sm:size-14 lg:size-16 mr-3 flex-shrink-0 text-black"
+        key={
+          sub.icon.type === "builtin"
+            ? `bulitin-${sub.icon.name}`
+            : sub.icon.type
+        }
+      >
         {renderIcon(sub.icon)}
       </Avatar>
       <div className="min-w-0 flex-1">

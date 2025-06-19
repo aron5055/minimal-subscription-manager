@@ -13,15 +13,16 @@ interface AvatarPickerProps {
   onChange: (icon: Icon) => void;
   onBlur: () => void;
   name?: string;
+  clearIcon: () => Icon;
 }
 
 const AvatarPicker = forwardRef<HTMLButtonElement, AvatarPickerProps>(
-  ({ id, value, onChange, onBlur }, ref) => {
+  ({ id, value, onChange, onBlur, clearIcon }, ref) => {
     const [open, setOpen] = useState(false);
     const { t } = useI18n();
 
     const handleChangeIcon = (name: BuiltinIcon) => {
-      onChange(name === "none" ? { type: "empty" } : { type: "builtin", name });
+      onChange(name === "none" ? clearIcon() : { type: "builtin", name });
       setOpen(false);
     };
 
@@ -61,7 +62,7 @@ const AvatarPicker = forwardRef<HTMLButtonElement, AvatarPickerProps>(
         open={open}
         onOpenChange={setOpen}
       >
-        <div className="grid grid-cols-3 gap-4 w-full">
+        <div className="grid grid-cols-3 gap-4 w-full mt-2">
           {Object.entries(GenericIcons).map(([name, Icon]) => (
             <Button
               key={name}

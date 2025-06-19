@@ -26,7 +26,7 @@ function getRootDomain(urlStr: string): string {
 
 export function getFaviconUrl(urlStr: string): string {
   const root = getRootDomain(urlStr);
-  return root ? `https://www.google.com/s2/favicons?sz=128&domain=${root}` : "";
+  return root ? `https://www.google.com/s2/favicons?domain=${root}&sz=128` : "";
 }
 
 export function exportData(state: State) {

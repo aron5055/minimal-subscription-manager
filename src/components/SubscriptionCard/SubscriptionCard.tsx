@@ -1,4 +1,5 @@
 import { useSubscription } from "@/contexts/SubsContext";
+import SubsDialog from "@/features/subscription/SubsDialog";
 import { cn, getTextColorForBackground } from "@/lib/utils";
 import type { Subscription } from "@/types/types";
 import { Folder, Pause, Pencil, Play, Trash } from "lucide-react";
@@ -19,7 +20,7 @@ interface SubCardProps {
 }
 
 export default function SubscriptionCard({ sub }: SubCardProps) {
-  const [{ cats }] = useSubscription();
+  const [{ cats }, dispatch] = useSubscription();
 
   const textColor = getTextColorForBackground("#ffffff");
 
@@ -64,13 +65,22 @@ export default function SubscriptionCard({ sub }: SubCardProps) {
         <SubscriptionInfo sub={sub} />
         <Separator className="my-6" />
         <div className="flex justify-around">
-          <Button variant="ghost">
-            <Pencil />
-          </Button>
+          <SubsDialog
+            sub={sub}
+            mode="edit"
+            trigger={
+              <Button variant="ghost">
+                <Pencil />
+              </Button>
+            }
+          />
           <Button variant="ghost">
             {sub.status === "active" ? <Pause size={16} /> : <Play size={16} />}
           </Button>
-          <Button variant="ghost">
+          <Button
+            variant="ghost"
+            onClick={() => dispatch({ type: "DELETE_SUB", id: sub.id })}
+          >
             <Trash />
           </Button>
         </div>

@@ -11,11 +11,11 @@ import { type ReactNode } from "react";
 import { Separator } from "./ui/separator";
 
 interface DialogWrapperProps {
-  trigger: ReactNode;
+  trigger?: ReactNode;
   title: string;
   description: string;
   children: ReactNode;
-  footer: ReactNode;
+  footer?: ReactNode;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }
@@ -31,7 +31,7 @@ export default function DialogWrapper({
 }: DialogWrapperProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
       <DialogContent
         className="
       p-0 w-[90vw] rounded-lg
@@ -52,7 +52,9 @@ export default function DialogWrapper({
           {children}
         </section>
         <Separator />
-        <DialogFooter className="shrink-0 px-6 py-4">{footer}</DialogFooter>
+        {footer && (
+          <DialogFooter className="shrink-0 px-6 py-4">{footer}</DialogFooter>
+        )}
       </DialogContent>
     </Dialog>
   );
