@@ -1,8 +1,9 @@
 import { useI18n } from "@/contexts/LangContext";
 import SettingDropDown from "@/features/settings/SettingDropDown";
 
-export default function Header() {
+export function Header() {
   const { t } = useI18n();
+
   return (
     <header className="w-full border-b shadow-sm bg-background">
       <div className="w-full flex h-16 items-center justify-between px-4 md:px-8">

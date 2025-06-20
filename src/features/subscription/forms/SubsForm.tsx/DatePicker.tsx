@@ -20,7 +20,7 @@ interface DatePickerProps {
   name?: string;
 }
 
-const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
+export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
   ({ id, value, onChange, onBlur, required = false }, ref) => {
     const isPicked = Boolean(value);
     const { t } = useI18n();
@@ -56,6 +56,3 @@ const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
     );
   },
 );
-
-DatePicker.displayName = "DatePicker";
-export default DatePicker;

@@ -19,7 +19,7 @@ interface ChartProps {
   title: string;
 }
 
-export default function ChartComponent({ data, title }: ChartProps) {
+export function ChartComponent({ data, title }: ChartProps) {
   const { t } = useI18n();
 
   if (!data.length) {

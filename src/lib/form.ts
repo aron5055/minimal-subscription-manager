@@ -2,6 +2,10 @@ import type { Translation } from "@/contexts/LangContext";
 import { subSchema } from "@/types/types";
 import { z } from "zod/v4";
 
+/**
+ * Create form validation schema with internationalization support
+ * Used for subscription form validation
+ */
 export default function makeFormSchema(
   defaultCurrency: string,
   t: Translation,

@@ -22,11 +22,12 @@
         "end": "订阅结束日期"
       },
       "category": {
-        "label": "编辑分类",
-        "description": "选择已有分类或者创建新分类"
+        "label": "选择分类",
+        "description": "选择已有分类或者创建新分类",
+        "manage": "管理分类..."
       },
       "cycle": {
-        "label": "付款周期",
+        "label": "订阅周期",
         "type": [
           { "label": "天", "value": "day(s)" },
           { "label": "月", "value": "month(s)" },
@@ -45,6 +46,14 @@
       "submit": "保存"
     }
   },
+  "card": {
+    "title": "订阅信息",
+    "description": "重看或编辑订阅",
+    "delete": {
+      "label": "删除订阅",
+      "description": "确定删除"
+    }
+  },
   "settings": {
     "label": "设置",
     "importData": "导入数据",
@@ -55,7 +64,10 @@
       "eng": "English",
       "cn": "中文"
     },
-    "reset": "️重置所有数据"
+    "reset": {
+      "label": "️重置所有数据",
+      "description": "你将永久丢失所有订阅数据，不能恢复！"
+    }
   },
   "analyse": {
     "label": "数据分析",
@@ -71,7 +83,9 @@
     "uncategorized": "未分类"
   },
   "common": {
-    "close": "关闭"
+    "close": "关闭",
+    "cancel": "取消",
+    "confirm": "确定"
   },
   "error": {
     "endAfter": "结束日期必须在开始日期之后或留空"

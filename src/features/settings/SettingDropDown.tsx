@@ -17,19 +17,28 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useI18n } from "@/contexts/LangContext";
 import { useSubscription } from "@/contexts/SubsContext";
-import { exportData } from "@/lib/utils";
+import { exportData } from "@/lib/data";
 import { exportBlobSchema } from "@/types/types";
 import getSymbolFromCurrency from "currency-symbol-map";
-import { DollarSign, Download, Globe, Settings, Upload } from "lucide-react";
+import {
+  Check,
+  DollarSign,
+  Download,
+  Globe,
+  Settings,
+  Upload,
+} from "lucide-react";
 import { useRef } from "react";
 import { toast } from "sonner";
+import { ResetMenu } from "./ResetMenu";
 
 export default function SettingDropDown() {
-  const { t, setLang } = useI18n();
-  const { setCurrency } = useCurrency();
+  const { t, lang, setLang } = useI18n();
+  const { currency, setCurrency } = useCurrency();
   const [state, dispatch] = useSubscription();
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -85,8 +94,10 @@ export default function SettingDropDown() {
                         key={code}
                         value={code}
                         onSelect={() => setCurrency(code)}
+                        className="flex items-center justify-between"
                       >
-                        {`(${getSymbolFromCurrency(code)}) ${code}`}
+                        <span>{`(${getSymbolFromCurrency(code)}) ${code}`}</span>
+                        {currency === code && <Check size={16} />}
                       </CommandItem>
                     ))}
                   </CommandList>
@@ -101,15 +112,27 @@ export default function SettingDropDown() {
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
-                <DropdownMenuItem onClick={() => setLang("zh")}>
-                  {t.settings.lang.cn}
+                <DropdownMenuItem
+                  onClick={() => setLang("zh")}
+                  className="flex items-center justify-between"
+                >
+                  <span>{t.settings.lang.cn}</span>
+                  {lang === "zh" && <Check size={16} />}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLang("en")}>
-                  {t.settings.lang.eng}
+                <DropdownMenuItem
+                  onClick={() => setLang("en")}
+                  className="flex items-center justify-between"
+                >
+                  <span>{t.settings.lang.eng}</span>
+                  {lang === "en" && <Check size={16} />}
                 </DropdownMenuItem>
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
           </DropdownMenuSub>
+          <Separator />
+          <DropdownMenuItem asChild>
+            <ResetMenu />
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 

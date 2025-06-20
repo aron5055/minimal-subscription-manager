@@ -1,5 +1,8 @@
 import type { Subscription } from "@/types/types";
 
+/**
+ * Calculate monthly cost based on subscription billing cycle
+ */
 export const calculateMonthlyCost = (subscription: Subscription): number => {
   const { price, cycle } = subscription;
   const { num, type } = cycle;
@@ -16,6 +19,9 @@ export const calculateMonthlyCost = (subscription: Subscription): number => {
   }
 };
 
+/**
+ * Calculate yearly cost based on subscription billing cycle
+ */
 export const calculateYearlyCost = (subscription: Subscription): number => {
   const { price, cycle } = subscription;
   const { num, type } = cycle;

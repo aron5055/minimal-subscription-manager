@@ -7,6 +7,7 @@ export type Action =
   | { type: "DELETE_SUB"; id: string }
   | { type: "RESET_SUB" }
   | { type: "MOVE_SUB"; id: string; to: string }
+  | { type: "REORDER"; payload: Subscription[] }
   | { type: "ADD_CAT"; cat: Category }
   | { type: "RENAME_CAT"; id: string; name: string }
   | { type: "DELETE_CAT"; id: string }
@@ -26,6 +27,9 @@ function subReducer(subs: Subscription[], a: Action) {
     }
     case "RESET_SUB": {
       return [];
+    }
+    case "REORDER": {
+      return a.payload;
     }
     case "MOVE_SUB": {
       return subs.map((s) => (s.id === a.id ? { ...s, categoryId: a.to } : s));

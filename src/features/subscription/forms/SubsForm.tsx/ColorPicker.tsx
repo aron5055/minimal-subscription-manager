@@ -18,7 +18,7 @@ interface ColorPickerProps {
   name?: string;
 }
 
-const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(
+export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(
   ({ id, value, onChange, onBlur }, ref) => {
     const { t } = useI18n();
     const [color, setColor] = useState(value);
@@ -72,6 +72,3 @@ const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(
     );
   },
 );
-
-ColorPicker.displayName = "ColorPicker";
-export default ColorPicker;

@@ -1,5 +1,5 @@
-import { generateSoftColor } from "@/lib/utils";
-import { GenericIcons } from "@/utils/genericIcons";
+import { generateSoftColor } from "@/lib/color";
+import { GenericIcons } from "@/lib/icon";
 import { nanoid } from "nanoid";
 import { z } from "zod/v4";
 

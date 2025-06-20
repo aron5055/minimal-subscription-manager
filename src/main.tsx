@@ -9,7 +9,7 @@ import "./index.css";
 
 // 在开发模式下加载开发工具
 if (import.meta.env.DEV) {
-  import("./utils/devTools");
+  import("./lib/dev");
 }
 
 createRoot(document.getElementById("root")!).render(

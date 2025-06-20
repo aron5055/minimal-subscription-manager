@@ -1,10 +1,9 @@
-import DialogWrapper from "@/components/DialogWrapper";
+import { DialogWrapper } from "@/components/common/DialogWrapper";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/contexts/LangContext";
+import { GenericIcons, renderIcon, type BuiltinIcon } from "@/lib/icon";
 import type { Icon } from "@/types/types";
-import { GenericIcons, type BuiltinIcon } from "@/utils/genericIcons";
-import { renderIcon } from "@/utils/renderIcon";
 import { forwardRef, useState } from "react";
 
 interface AvatarPickerProps {
@@ -16,7 +15,7 @@ interface AvatarPickerProps {
   clearIcon: () => Icon;
 }
 
-const AvatarPicker = forwardRef<HTMLButtonElement, AvatarPickerProps>(
+export const AvatarPicker = forwardRef<HTMLButtonElement, AvatarPickerProps>(
   ({ id, value, onChange, onBlur, clearIcon }, ref) => {
     const [open, setOpen] = useState(false);
     const { t } = useI18n();
@@ -78,7 +77,3 @@ const AvatarPicker = forwardRef<HTMLButtonElement, AvatarPickerProps>(
     );
   },
 );
-
-AvatarPicker.displayName = "AvatarPicker";
-
-export default AvatarPicker;

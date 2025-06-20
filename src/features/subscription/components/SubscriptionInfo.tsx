@@ -1,10 +1,10 @@
-import { daysLeft } from "@/lib/utils";
+import { Avatar } from "@/components/ui/avatar";
+import { daysLeft } from "@/lib/date";
+import { renderIcon } from "@/lib/icon";
 import type { Subscription } from "@/types/types";
-import { renderIcon } from "@/utils/renderIcon";
 import getSymbolFromCurrency from "currency-symbol-map";
-import { Avatar } from "../ui/avatar";
 
-export default function SubscriptionInfo({ sub }: { sub: Subscription }) {
+export function SubscriptionInfo({ sub }: { sub: Subscription }) {
   return (
     <div className="flex items-center min-w-0 flex-1">
       <Avatar

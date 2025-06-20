@@ -11,19 +11,19 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useI18n } from "@/contexts/LangContext";
+import makeFormSchema from "@/lib/form";
 import type { Icon, Subscription } from "@/types/types";
-import makeFormSchema from "@/utils/makeFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { parseISO } from "date-fns";
 import { useMemo } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import AvatarPicker from "./AvatarPicker";
-import BillingCycleField from "./BillingCycleField";
-import CategoryPicker from "./CategoryPicker";
-import ColorPicker from "./ColorPicker";
-import CurrencyPicker from "./CurrencyPicker";
-import DatePicker from "./DatePicker";
-import PresetPicker from "./PresetPicker";
+import { AvatarPicker } from "./AvatarPicker";
+import { BillingCycleField } from "./BillingCycleField";
+import { CategoryPicker } from "./CategoryPicker";
+import { ColorPicker } from "./ColorPicker";
+import { CurrencyPicker } from "./CurrencyPicker";
+import { DatePicker } from "./DatePicker";
+import { PresetPicker } from "./PresetPicker";
 
 interface SubsFormProps {
   sub?: Subscription;
@@ -31,7 +31,7 @@ interface SubsFormProps {
   formId?: string;
 }
 
-export default function SubsForm({
+export function SubsForm({
   sub,
   onSubmit,
   formId = "subscription-form",

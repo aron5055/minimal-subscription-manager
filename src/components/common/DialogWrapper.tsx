@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { type ReactNode } from "react";
-import { Separator } from "./ui/separator";
+import { Separator } from "../ui/separator";
 
 interface DialogWrapperProps {
   trigger?: ReactNode;
@@ -20,7 +20,7 @@ interface DialogWrapperProps {
   onOpenChange?: (open: boolean) => void;
 }
 
-export default function DialogWrapper({
+export function DialogWrapper({
   trigger,
   title,
   description,

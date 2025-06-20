@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { useI18n } from "@/contexts/LangContext";
 
-export default function PresetPicker() {
+export function PresetPicker() {
   const { t } = useI18n();
 
   return (

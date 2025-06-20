@@ -13,11 +13,11 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useI18n } from "@/contexts/LangContext";
 import { useAllCats, useSubscription } from "@/contexts/SubsContext";
-import { generateSoftColor } from "@/lib/utils";
-import { calculateMonthlyCost, calculateYearlyCost } from "@/utils/cost";
+import { generateSoftColor } from "@/lib/color";
+import { calculateMonthlyCost, calculateYearlyCost } from "@/lib/cost";
 import { ChartPie } from "lucide-react";
 import { useMemo, useState } from "react";
-import ChartComponent from "./ChartComponent";
+import { ChartComponent } from "./ChartComponent";
 
 //TODO: fix Blocked aria-hidden on an element because its descendant retained focus
 export default function AnalyticsDrawer() {

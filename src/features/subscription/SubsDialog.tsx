@@ -1,10 +1,10 @@
-import DialogWrapper from "@/components/DialogWrapper";
+import { DialogWrapper } from "@/components/common/DialogWrapper";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/contexts/LangContext";
 import { useSubscription } from "@/contexts/SubsContext";
 import { type Subscription } from "@/types/types";
 import { useState, type ReactElement } from "react";
-import SubsForm from "./SubsForm.tsx/SubsForm";
+import { SubsForm } from "./forms/SubsForm.tsx/SubsForm";
 
 interface SubsDialogProps {
   trigger?: ReactElement;

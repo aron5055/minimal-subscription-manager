@@ -8,13 +8,18 @@ export type Lang = "en" | "zh";
 
 export type Translation = typeof zh;
 
-const resources: Record<Lang, Translation> = { en, zh };
+const resources: Record<Lang, Translation> = {
+  en: en as any, // 临时类型断言，允许英文版本缺少部分字段
+  zh,
+};
 
 const LangContext = createContext<{
   t: Translation;
+  lang: Lang;
   setLang: (l: Lang) => void;
 }>({
   t: resources.en,
+  lang: "en",
   setLang: () => {},
 });
 
@@ -30,7 +35,7 @@ export const I18nProvider: FC<{ children: ReactNode }> = ({ children }) => {
   });
 
   return (
-    <LangContext.Provider value={{ t: resources[lang], setLang }}>
+    <LangContext.Provider value={{ t: resources[lang], lang, setLang }}>
       {children}
     </LangContext.Provider>
   );
