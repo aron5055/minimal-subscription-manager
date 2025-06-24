@@ -1,31 +1,68 @@
 {
   "title": "Minimal Subscription Manager",
   "subscription": {
-    "label": "Add Subscription",
-    "description": "Subscription Details",
+    "add": "Add Subscription",
+    "edit": "Edit Subscription",
+    "description": "Please fill in subscription details",
     "form": {
       "title": "Name",
       "url": {
         "label": "URL",
-        "placeholder": "Enter the website to auto-fetch the icon"
+        "placeholder": "Check the box on the right to get icon"
       },
+      "icon": {
+        "label": "Icon",
+        "description": "Select icon",
+        "clear": "Clear icon"
+      },
+      "currency": "Search currency",
       "notes": "Notes",
-      "date": "Start Date",
+      "date": {
+        "start": "Subscription Start Date",
+        "end": "Subscription End Date"
+      },
       "cycle": {
-        "label": "Payment Cycle",
-        "group": [
-          { "label": "Monthly", "value": "monthly" },
-          { "label": "Yearly", "value": "yearly" },
-          { "label": "Other", "value": "other" }
+        "label": "Billing Cycle",
+        "type": [
+          { "label": "Day(s)", "value": "day(s)" },
+          { "label": "Month(s)", "value": "month(s)" },
+          { "label": "Year(s)", "value": "year(s)" }
         ]
       },
-      "fee": "Subscription Fee",
-      "color": "Background Color",
+      "price": "Cost",
+      "color": {
+        "label": "Background Color",
+        "input": "Enter color (hex)"
+      },
+      "category": {
+        "label": "Select Category",
+        "description": "Choose an existing category or create a new one",
+        "manage": "Manage Categories",
+        "add": "Add Category",
+        "edit": "Edit Category",
+        "delete": "Delete Category",
+        "deleteConfirm": "Are you sure you want to delete this category? Subscriptions in this category will be moved to the default category.",
+        "name": "Category Name",
+        "create": "Create",
+        "save": "Save",
+        "cancel": "Cancel",
+        "clear": "Clear category"
+      },
       "preset": {
-        "label": "Preset",
-        "description": "Select a preset"
+        "label": "Preset Configuration",
+        "description": "Select preset configuration"
       },
       "submit": "Save"
+    }
+  },
+  "card": {
+    "title": "Subscription Details",
+    "description": "View or edit subscription",
+    "expired": "Expired",
+    "daysLeft": "days left",
+    "delete": {
+      "label": "Delete Subscription",
+      "description": "Are you sure you want to delete this subscription?"
     }
   },
   "settings": {
@@ -38,6 +75,54 @@
       "eng": "English",
       "cn": "中文"
     },
-    "reset": "Reset All Data"
+    "color": {
+      "label": "Theme Color",
+      "light": "Light Mode",
+      "dark": "Dark Mode",
+      "background": "Show Background Color"
+    },
+    "reset": {
+      "label": "Reset All Data",
+      "description": "You will permanently lose all subscription data and cannot recover it!"
+    }
+  },
+  "common": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "analyse": {
+    "label": "Data Analysis",
+    "description": "Provides monthly and yearly spending statistics",
+    "monthly": "Monthly Statistics",
+    "yearly": "Yearly Statistics",
+    "tabs": {
+      "monthly": "Monthly Statistics",
+      "yearly": "Yearly Statistics"
+    },
+    "noData": "No data available",
+    "totalSpent": "Total Spent",
+    "uncategorized": "Uncategorized"
+  },
+  "sort": {
+    "label": "Sort",
+    "by": {
+      "title": "By Name",
+      "date": "By Date",
+      "priceMax": "By Price (High to Low)",
+      "priceMin": "By Price (Low to High)",
+      "category": "By Category"
+    }
+  },
+  "filter": {
+    "label": "Filter",
+    "by": {
+      "active": "Show Active Subscriptions",
+      "paused": "Show Paused Subscriptions",
+      "category": "Filter by Category"
+    }
+  },
+  "error": {
+    "endAfter": "End date must be after start date or left empty"
   }
 }

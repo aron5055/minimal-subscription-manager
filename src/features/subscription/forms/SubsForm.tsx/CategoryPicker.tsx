@@ -15,8 +15,9 @@ import {
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAllCats } from "@/contexts/SubsContext";
-import { ChevronDown, Pencil } from "lucide-react";
+import { ChevronDown, Pencil, X } from "lucide-react";
 import { forwardRef, useState } from "react";
+import { CategoryManage } from "./CategoryManage";
 
 interface CategoryPickerProps {
   id?: string;
@@ -87,16 +88,19 @@ export const CategoryPicker = forwardRef<
             </CommandList>
           </ScrollArea>
           <div className="border-t p-2">
-            <Button
-              variant="ghost"
-              className="w-full"
-              onClick={() => {
-                setOpen(false);
-                // 打开全量「管理分类」Dialog / 页面
-              }}
-            >
-              {t.subscription.form.category.manage}
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  onChange("");
+                  setOpen(false);
+                }}
+              >
+                <X />
+                {t.subscription.form.category.clear}
+              </Button>
+              <CategoryManage />
+            </div>
           </div>
         </Command>
       </PopoverContent>

@@ -42,7 +42,7 @@ export default function AnalyticsDrawer() {
           period === "monthly"
             ? calculateMonthlyCost(sub)
             : calculateYearlyCost(sub),
-        color: generateSoftColor(),
+        color: sub.color || generateSoftColor(),
       }))
       .filter((item) => item.value > 0);
   }, [activeSubscriptions, period]);
@@ -52,7 +52,6 @@ export default function AnalyticsDrawer() {
     if (!activeSubscriptions.length) return [];
 
     const categoryMap = new Map<string, number>();
-    const categoryColors = new Map<string, string>();
 
     activeSubscriptions.forEach((sub) => {
       const categoryId = sub.categoryId || "uncategorized";
@@ -68,17 +67,13 @@ export default function AnalyticsDrawer() {
         categoryName,
         (categoryMap.get(categoryName) || 0) + cost,
       );
-
-      if (!categoryColors.has(categoryName)) {
-        categoryColors.set(categoryName, generateSoftColor());
-      }
     });
 
     return Array.from(categoryMap.entries())
       .map(([name, value]) => ({
         name,
         value,
-        color: categoryColors.get(name) || generateSoftColor(),
+        color: generateSoftColor(),
       }))
       .filter((item) => item.value > 0);
   }, [activeSubscriptions, categories, period]);

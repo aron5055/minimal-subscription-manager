@@ -23,7 +23,11 @@ export const DeleteDialog = forwardRef<HTMLButtonElement, DeleteDialogProps>(
           dispatch({ type: "DELETE_SUB", id: subId });
         }}
         trigger={
-          <Button variant="ghost" ref={ref}>
+          <Button
+            variant="outline"
+            ref={ref}
+            className="flex items-center gap-2 h-8"
+          >
             <Trash />
           </Button>
         }

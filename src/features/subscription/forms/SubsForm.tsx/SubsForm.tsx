@@ -106,6 +106,21 @@ export function SubsForm({
                   <FormControl>
                     <Input
                       {...field}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        // 移除非数字和小数点的字符，保留数字格式
+                        const numericValue = value.replace(/[^\d.]/g, "");
+                        // 确保只有一个小数点
+                        const parts = numericValue.split(".");
+                        const formattedValue =
+                          parts.length > 2
+                            ? parts[0] + "." + parts.slice(1).join("")
+                            : numericValue;
+
+                        field.onChange(
+                          formattedValue ? parseFloat(formattedValue) : 0,
+                        );
+                      }}
                       placeholder="0.00"
                       inputMode="decimal"
                       className="text-center text-lg font-medium"

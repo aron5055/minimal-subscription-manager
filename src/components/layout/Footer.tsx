@@ -1,6 +1,6 @@
 import { useI18n } from "@/contexts/LangContext";
 import AnalyticsDrawer from "@/features/analytics/AnalyticsDrawer";
-import { SortMenu } from "@/features/sort/SortMenu";
+import { SortFilterMenu } from "@/features/sortFilter/SortFilterMenu";
 import SubsDialog from "@/features/subscription/SubsDialog";
 import { Plus } from "lucide-react";
 import { Button } from "../ui/button";
@@ -18,7 +18,7 @@ export function Footer() {
     <footer className="border-t flex justify-around items-center h-16 p-4 bg-background">
       <AnalyticsDrawer />
       <SubsDialog trigger={trigger} />
-      <SortMenu />
+      <SortFilterMenu />
     </footer>
   );
 }

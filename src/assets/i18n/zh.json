@@ -24,7 +24,16 @@
       "category": {
         "label": "选择分类",
         "description": "选择已有分类或者创建新分类",
-        "manage": "管理分类..."
+        "manage": "管理分类",
+        "add": "添加分类",
+        "edit": "编辑分类",
+        "delete": "删除分类",
+        "deleteConfirm": "确定要删除此分类吗？该分类下的订阅将被移动到默认分类。",
+        "name": "分类名称",
+        "create": "创建",
+        "save": "保存",
+        "cancel": "取消",
+        "clear": "清除分类"
       },
       "cycle": {
         "label": "订阅周期",
@@ -49,6 +58,8 @@
   "card": {
     "title": "订阅信息",
     "description": "重看或编辑订阅",
+    "expired": "已过期",
+    "daysLeft": "天后到期",
     "delete": {
       "label": "删除订阅",
       "description": "确定删除"
@@ -63,6 +74,12 @@
       "label": "语言",
       "eng": "English",
       "cn": "中文"
+    },
+    "color": {
+      "label": "主题颜色",
+      "light": "浅色模式",
+      "dark": "深色模式",
+      "background": "显示背景色"
     },
     "reset": {
       "label": "️重置所有数据",
@@ -86,6 +103,24 @@
     "close": "关闭",
     "cancel": "取消",
     "confirm": "确定"
+  },
+  "sort": {
+    "label": "排序",
+    "by": {
+      "title": "按名称",
+      "date": "按日期",
+      "priceMax": "按价格(高到低)",
+      "priceMin": "按价格(低到高)",
+      "category": "按分类"
+    }
+  },
+  "filter": {
+    "label": "筛选",
+    "by": {
+      "active": "显示活跃订阅",
+      "paused": "显示暂停订阅",
+      "category": "筛选分类"
+    }
   },
   "error": {
     "endAfter": "结束日期必须在开始日期之后或留空"

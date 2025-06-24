@@ -34,16 +34,18 @@ function subReducer(subs: Subscription[], a: Action) {
     case "MOVE_SUB": {
       return subs.map((s) => (s.id === a.id ? { ...s, categoryId: a.to } : s));
     }
+    case "DELETE_CAT": {
+      // Move subscriptions from deleted category to default (empty string)
+      return subs.map((s) =>
+        s.categoryId === a.id ? { ...s, categoryId: "" } : s,
+      );
+    }
     default:
       return subs;
   }
 }
 
-function catReducer(
-  cats: Record<string, Category>,
-  a: Action,
-  subs: Subscription[],
-) {
+function catReducer(cats: Record<string, Category>, a: Action) {
   switch (a.type) {
     case "ADD_CAT": {
       return { ...cats, [a.cat.id]: a.cat };
@@ -52,7 +54,7 @@ function catReducer(
       return { ...cats, [a.id]: { ...cats[a.id], name: a.name } };
     }
     case "DELETE_CAT": {
-      return subs.some((s) => s.categoryId === a.id) ? cats : omit(cats, a.id);
+      return omit(cats, a.id);
     }
     case "RESET_CAT": {
       return {};
@@ -68,7 +70,7 @@ export default function rootReducer(state: State, a: Action) {
   }
 
   const subs = subReducer(state.subs, a);
-  const cats = catReducer(state.cats, a, subs);
+  const cats = catReducer(state.cats, a);
 
   return state.subs === subs && state.cats === cats ? state : { subs, cats };
 }

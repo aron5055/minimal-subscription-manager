@@ -16,18 +16,24 @@ interface AlertDialogProps {
   title: string;
   description: string;
   action: () => void;
-  trigger: ReactElement;
+  trigger?: ReactElement;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 export function AlertDialogWrapper({
   title,
   description,
   action,
   trigger,
+  open,
+  onOpenChange,
 }: AlertDialogProps) {
   const { t } = useI18n();
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
+      {trigger ? (
+        <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
+      ) : null}
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>

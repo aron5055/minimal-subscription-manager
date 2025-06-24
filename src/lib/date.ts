@@ -1,6 +1,18 @@
 import type { Subscription } from "@/types/types";
 
 /**
+ * Check if a subscription has expired
+ * Returns true if subscription has an end date and it's in the past
+ */
+export function isSubscriptionExpired(sub: Subscription): boolean {
+  if (!sub.endDate) {
+    return false;
+  }
+
+  return new Date(sub.endDate) < new Date();
+}
+
+/**
  * Calculate the number of days left until the next billing cycle
  * Returns null if subscription is paused or has ended
  */
@@ -11,7 +23,7 @@ export function daysLeft(sub: Subscription): number | null {
   }
 
   // If subscription has ended, return null
-  if (sub.endDate && new Date(sub.endDate) < new Date()) {
+  if (isSubscriptionExpired(sub)) {
     return null;
   }
 

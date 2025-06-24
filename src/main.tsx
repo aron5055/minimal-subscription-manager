@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import { CurrencyProvider } from "./contexts/CurrencyContext.tsx";
 import { I18nProvider } from "./contexts/LangContext.tsx";
 import { SubsProvider } from "./contexts/SubsContext.tsx";
+import { ThemeProvider } from "./contexts/ThemeContext.tsx";
 import "./index.css";
 
 // 在开发模式下加载开发工具
@@ -15,12 +16,14 @@ if (import.meta.env.DEV) {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <I18nProvider>
-      <SubsProvider>
-        <CurrencyProvider>
-          <App />
-          <Toaster />
-        </CurrencyProvider>
-      </SubsProvider>
+      <ThemeProvider>
+        <SubsProvider>
+          <CurrencyProvider>
+            <App />
+            <Toaster />
+          </CurrencyProvider>
+        </SubsProvider>
+      </ThemeProvider>
     </I18nProvider>
   </StrictMode>,
 );

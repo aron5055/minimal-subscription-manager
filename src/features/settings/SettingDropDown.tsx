@@ -21,6 +21,7 @@ import { Separator } from "@/components/ui/separator";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useI18n } from "@/contexts/LangContext";
 import { useSubscription } from "@/contexts/SubsContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { exportData } from "@/lib/data";
 import { exportBlobSchema } from "@/types/types";
 import getSymbolFromCurrency from "currency-symbol-map";
@@ -29,6 +30,7 @@ import {
   DollarSign,
   Download,
   Globe,
+  Palette,
   Settings,
   Upload,
 } from "lucide-react";
@@ -40,6 +42,8 @@ export default function SettingDropDown() {
   const { t, lang, setLang } = useI18n();
   const { currency, setCurrency } = useCurrency();
   const [state, dispatch] = useSubscription();
+  const { theme, setTheme, enableBackgroundColor, setEnableBackgroundColor } =
+    useTheme();
   const fileRef = useRef<HTMLInputElement>(null);
 
   const importData = async () => {
@@ -128,6 +132,35 @@ export default function SettingDropDown() {
                 </DropdownMenuItem>
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
+          </DropdownMenuSub>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>
+              <Palette />
+              {t.settings.color.label}
+            </DropdownMenuSubTrigger>
+            <DropdownMenuSubContent>
+              <DropdownMenuItem
+                onClick={() => setTheme("light")}
+                className="flex items-center justify-between"
+              >
+                {t.settings.color.light}
+                {theme === "light" && <Check size={16} />}
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => setTheme("dark")}
+                className="flex items-center justify-between"
+              >
+                {t.settings.color.dark}
+                {theme === "dark" && <Check size={16} />}
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => setEnableBackgroundColor(!enableBackgroundColor)}
+                className="flex items-center justify-between"
+              >
+                {t.settings.color.background}
+                {enableBackgroundColor && <Check size={16} />}
+              </DropdownMenuItem>
+            </DropdownMenuSubContent>
           </DropdownMenuSub>
           <Separator />
           <DropdownMenuItem asChild>

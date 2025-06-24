@@ -23,11 +23,16 @@ import { Header } from "./components/layout/Header";
 import { useSubscription } from "./contexts/SubsContext";
 import { CardItem } from "./features/subscription/components/CardItem";
 import { SortableItem } from "./features/subscription/components/SortableItem";
+import { useExpiredSubscriptions } from "./hooks/useExpiredSubscriptions";
 
 function App() {
   const [{ subs }, dispatch] = useSubscription();
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [items, setItems] = useState(subs.map((sub) => sub.id));
+
+  // Automatically pause expired subscriptions
+  useExpiredSubscriptions();
+
   const sensors = useSensors(
     useSensor(MouseSensor, {
       activationConstraint: {

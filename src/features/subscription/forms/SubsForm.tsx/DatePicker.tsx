@@ -5,11 +5,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useI18n } from "@/contexts/LangContext";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 
 interface DatePickerProps {
   id?: string;
@@ -23,17 +22,17 @@ interface DatePickerProps {
 export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
   ({ id, value, onChange, onBlur, required = false }, ref) => {
     const isPicked = Boolean(value);
-    const { t } = useI18n();
+    const [open, setOpen] = useState(false);
 
     return (
-      <Popover>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id={id}
             ref={ref}
             variant="outline"
             className={cn(
-              "w-2/3 justify-start text-left font-normal",
+              "w-1/2 justify-start text-left font-normal",
               !isPicked && "text-muted-foreground",
             )}
             onBlur={onBlur}
@@ -46,7 +45,10 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
           <Calendar
             mode="single"
             selected={value ?? undefined}
-            onSelect={(date: Date | undefined) => onChange(date ?? null)}
+            onSelect={(date: Date | undefined) => {
+              onChange(date ?? null);
+              setOpen(false);
+            }}
             captionLayout="dropdown"
             required={required}
             initialFocus
