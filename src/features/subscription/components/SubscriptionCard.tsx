@@ -121,7 +121,7 @@ export function SubscriptionCard({ sub }: SubCardProps) {
                 {t.subscription.form.cycle.label}:
               </span>
               <span className="text-sm font-medium">
-                {`${sub.cycle.num} ${sub.cycle.type}`}
+                {`${sub.cycle.num} ${t.subscription.form.cycle.map[sub.cycle.type]}`}
               </span>
             </div>
 

@@ -67,11 +67,11 @@ export function SortFilterMenu() {
               </div>
               <div>
                 <Label>{t.filter.label}</Label>
-                <div>
+                <div className="flex gap-2 items-center mb-1">
                   <Checkbox id="filter-active" />
                   <Label htmlFor="filter-active">{t.filter.by.active}</Label>
                 </div>
-                <div>
+                <div className="flex gap-2 items-center">
                   <Checkbox id="filter-paused" />
                   <Label htmlFor="filter-paused">{t.filter.by.paused}</Label>
                 </div>

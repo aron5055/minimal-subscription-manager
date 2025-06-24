@@ -27,7 +27,11 @@ import { getFaviconUrl } from "./url";
 
 // None icon component for empty state
 const NoneIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6 stroke-current opacity-40" style={{ color: "currentColor" }}>
+  <svg
+    viewBox="0 0 24 24"
+    className="w-6 h-6 stroke-current opacity-40"
+    style={{ color: "hsl(var(--foreground))" }}
+  >
     <circle cx="12" cy="12" r="10" fill="none" />
     <line x1="8" y1="8" x2="16" y2="16" />
   </svg>
@@ -80,7 +84,13 @@ export function renderIcon(icon: Icon) {
       const Builtin = GenericIcons[icon.name];
       return (
         <AvatarFallback>
-          <Builtin style={{ width: "30px", height: "30px", color: "currentColor" }} />
+          <Builtin
+            style={{
+              width: "30px",
+              height: "30px",
+              color: "hsl(var(--foreground))",
+            }}
+          />
         </AvatarFallback>
       );
     }

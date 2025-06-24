@@ -41,7 +41,8 @@
           { "label": "天", "value": "day(s)" },
           { "label": "月", "value": "month(s)" },
           { "label": "年", "value": "year(s)" }
-        ]
+        ],
+        "map": { "day(s)": "天", "month(s)": "月", "year(s)": "年" }
       },
       "price": "开销",
       "color": {

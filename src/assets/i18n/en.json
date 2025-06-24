@@ -27,7 +27,12 @@
           { "label": "Day(s)", "value": "day(s)" },
           { "label": "Month(s)", "value": "month(s)" },
           { "label": "Year(s)", "value": "year(s)" }
-        ]
+        ],
+        "map": {
+          "day(s)": "days(s)",
+          "month(s)": "months(s)",
+          "year(s)": "years(s)"
+        }
       },
       "price": "Cost",
       "color": {
