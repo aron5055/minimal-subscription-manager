@@ -8,6 +8,7 @@ export type Action =
   | { type: "RESET_SUB" }
   | { type: "MOVE_SUB"; id: string; to: string }
   | { type: "REORDER"; payload: Subscription[] }
+  | { type: "TOGGLE_SUB_STATUS"; id: string }
   | { type: "ADD_CAT"; cat: Category }
   | { type: "RENAME_CAT"; id: string; name: string }
   | { type: "DELETE_CAT"; id: string }
@@ -31,7 +32,26 @@ function subReducer(subs: Subscription[], a: Action) {
     case "REORDER": {
       return a.payload;
     }
+    case "TOGGLE_SUB_STATUS": {
+      const updatedSubs = subs.map((s) =>
+        s.id === a.id
+          ? {
+              ...s,
+              status:
+                s.status === "active"
+                  ? ("paused" as const)
+                  : ("active" as const),
+            }
+          : s,
+      );
+      // reorder
+      return [
+        ...updatedSubs.filter((s) => s.status === "active"),
+        ...updatedSubs.filter((s) => s.status === "paused"),
+      ];
+    }
     case "MOVE_SUB": {
+      // move subscription to a different category
       return subs.map((s) => (s.id === a.id ? { ...s, categoryId: a.to } : s));
     }
     case "DELETE_CAT": {

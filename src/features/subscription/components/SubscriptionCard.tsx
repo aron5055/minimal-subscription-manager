@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/sheet";
 import { useI18n } from "@/contexts/LangContext";
 import { useSubscription } from "@/contexts/SubsContext";
-import { useTheme } from "@/contexts/ThemeContext";
 import SubsDialog from "@/features/subscription/SubsDialog";
 import { getTextColorForBackground } from "@/lib/color";
 import { cn } from "@/lib/ui";
@@ -25,7 +24,6 @@ interface SubCardProps {
 export function SubscriptionCard({ sub }: SubCardProps) {
   const [{ cats }, dispatch] = useSubscription();
   const { t } = useI18n();
-  const { enableBackgroundColor } = useTheme();
 
   const isInactive = sub.status === "paused";
 
@@ -94,15 +92,12 @@ export function SubscriptionCard({ sub }: SubCardProps) {
               variant="outline"
               size="sm"
               className="flex items-center gap-2"
-              onClick={() =>
+              onClick={() => {
                 dispatch({
-                  type: "UPDATE_SUB",
-                  payload: {
-                    ...sub,
-                    status: sub.status === "active" ? "paused" : "active",
-                  },
-                })
-              }
+                  type: "TOGGLE_SUB_STATUS",
+                  id: sub.id,
+                });
+              }}
             >
               {sub.status === "active" ? (
                 <Pause size={14} />
