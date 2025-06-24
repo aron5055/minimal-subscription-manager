@@ -46,8 +46,8 @@ export function ChartComponent({ data, title }: ChartProps) {
               dataKey="value"
               nameKey="name"
               cx="50%"
-              cy="45%"
-              outerRadius="60%"
+              cy="50%"
+              outerRadius="70%"
               innerRadius="0%"
               labelLine={false}
             >
@@ -64,11 +64,17 @@ export function ChartComponent({ data, title }: ChartProps) {
 
             <Legend
               verticalAlign="bottom"
-              height={80}
+              height={60}
               wrapperStyle={{
-                paddingTop: "10px",
+                paddingTop: "5px",
                 fontSize: "12px",
                 lineHeight: "1.2",
+                backgroundColor: "hsl(var(--card))",
+                borderRadius: "6px",
+                padding: "8px",
+                border: "1px solid hsl(var(--border))",
+                height: "auto",
+                marginBottom: "1rem",
               }}
             />
           </PieChart>

@@ -1,6 +1,7 @@
 import { Avatar } from "@/components/ui/avatar";
 import { useI18n } from "@/contexts/LangContext";
 import { daysLeft, isSubscriptionExpired } from "@/lib/date";
+import { getTextColorForBackground } from "@/lib/color";
 import { renderIcon } from "@/lib/icon";
 import type { Subscription } from "@/types/types";
 import getSymbolFromCurrency from "currency-symbol-map";
@@ -9,11 +10,12 @@ export function SubscriptionInfo({ sub }: { sub: Subscription }) {
   const { t } = useI18n();
   const isExpired = isSubscriptionExpired(sub);
   const daysRemaining = daysLeft(sub);
+  const textColor = getTextColorForBackground(sub.color);
 
   return (
     <div className="flex items-center min-w-0 flex-1">
       <Avatar
-        className="size-12 sm:size-14 lg:size-16 mr-3 flex-shrink-0 text-black"
+        className={`size-12 sm:size-14 lg:size-16 mr-3 flex-shrink-0 ${textColor}`}
         key={
           sub.icon.type === "builtin"
             ? `bulitin-${sub.icon.name}`
