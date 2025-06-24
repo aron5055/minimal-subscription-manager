@@ -67,7 +67,7 @@ export function ChartComponent({ data, title }: ChartProps) {
               height={60}
               wrapperStyle={{
                 paddingTop: "5px",
-                fontSize: "12px",
+                fontWeight: "600",
                 backgroundColor: "hsl(var(--card))",
                 borderRadius: "6px",
                 padding: "8px",

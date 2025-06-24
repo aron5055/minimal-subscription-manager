@@ -42,7 +42,7 @@ export default function AnalyticsDrawer() {
           period === "monthly"
             ? calculateMonthlyCost(sub)
             : calculateYearlyCost(sub),
-        color: sub.color || generateSoftColor(),
+        color: generateSoftColor(),
       }))
       .filter((item) => item.value > 0);
   }, [activeSubscriptions, period]);
