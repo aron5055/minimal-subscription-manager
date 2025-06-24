@@ -36,7 +36,7 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(
             onBlur={onBlur}
             ref={ref}
             variant="ghost"
-            className="flex items-center justify-between px-4 bg-neutral-100 h-10 w-full"
+            className="flex items-center justify-between p-4 border-2 rounded-lg h-10 w-full"
           >
             <span>{t.subscription.form.color.label}</span>
             <span

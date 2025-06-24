@@ -1,5 +1,5 @@
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { createContext, useContext, type FC, type ReactNode } from "react";
+import { createContext, useContext, useEffect, type FC, type ReactNode } from "react";
 
 const ThemeContext = createContext<{
   theme: "light" | "dark";
@@ -25,6 +25,12 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   });
   const [enableBackgroundColor, setEnableBackgroundColor] =
     useLocalStorage<boolean>("enableBackgroundColor", false);
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    root.classList.remove("light", "dark");
+    root.classList.add(theme);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider

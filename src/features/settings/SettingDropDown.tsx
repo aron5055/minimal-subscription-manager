@@ -67,8 +67,11 @@ export default function SettingDropDown() {
     <>
       {/**TODO: abstraction */}
       <DropdownMenu>
-        <DropdownMenuTrigger className="focus:outline-none">
-          <Settings size={24} />
+        <DropdownMenuTrigger className="focus:outline-none p-2 rounded-lg hover:bg-accent transition-colors duration-150">
+          <Settings
+            size={24}
+            className="text-muted-foreground hover:text-foreground transition-colors duration-150"
+          />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel className="text-center">

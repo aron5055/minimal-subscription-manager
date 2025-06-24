@@ -15,7 +15,7 @@ export function Footer() {
   );
 
   return (
-    <footer className="border-t flex justify-around items-center h-16 p-4 bg-background">
+    <footer className="border-t border-border/40 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60 flex justify-around items-center h-16 p-4">
       <AnalyticsDrawer />
       <SubsDialog trigger={trigger} />
       <SortFilterMenu />

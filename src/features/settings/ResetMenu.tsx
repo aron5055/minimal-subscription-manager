@@ -20,7 +20,7 @@ export const ResetMenu = forwardRef<HTMLButtonElement>(({}, ref) => {
       trigger={
         <Button
           variant="ghost"
-          className="p-2 w-full hover:bg-red-500 hover:text-white justify-normal"
+          className="p-3 w-full hover:bg-red-500 hover:text-white justify-normal"
           ref={ref}
         >
           <X />
