@@ -1,4 +1,5 @@
 import { useSubscription } from "@/contexts/SubsContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { getTextColorForBackground } from "@/lib/color";
 import { cn } from "@/lib/ui";
 import type { UniqueIdentifier } from "@dnd-kit/core";
@@ -12,6 +13,7 @@ interface CardItemProps {
 export const CardItem = forwardRef<HTMLDivElement, CardItemProps>(
   ({ id }, ref) => {
     const [{ subs }] = useSubscription();
+    const { enableBackgroundColor } = useTheme();
 
     // Find the subscription by ID
     const sub = subs.find((subscription) => subscription.id === id);
@@ -20,7 +22,9 @@ export const CardItem = forwardRef<HTMLDivElement, CardItemProps>(
       return null;
     }
 
-    const textColor = getTextColorForBackground(sub.color);
+    const textColor = enableBackgroundColor
+      ? getTextColorForBackground(sub.color)
+      : "";
 
     return (
       <div
@@ -30,7 +34,7 @@ export const CardItem = forwardRef<HTMLDivElement, CardItemProps>(
           textColor,
         )}
         style={{
-          backgroundColor: sub.color,
+          backgroundColor: enableBackgroundColor ? sub.color : undefined,
         }}
       >
         <SubscriptionInfo sub={sub} />

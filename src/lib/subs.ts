@@ -33,15 +33,12 @@ export function sortSubs(
   }
 }
 
-type FilterType = "active" | "paused" | "category";
+type FilterType = "active" | "paused" | "category" | "month" | "year" | "day";
 
 export function filterSubs(
   subs: Subscription[],
   type: FilterType,
-  config: {
-    category?: string;
-    term?: string;
-  },
+  category?: string,
 ) {
   switch (type) {
     case "active": {
@@ -51,7 +48,16 @@ export function filterSubs(
       return subs.filter((sub) => sub.status === "paused");
     }
     case "category": {
-      return subs.filter((sub) => sub.categoryId === config.category);
+      return subs.filter((sub) => sub.categoryId === category);
+    }
+    case "month": {
+      return subs.filter((sub) => sub.cycle.type === "month(s)");
+    }
+    case "year": {
+      return subs.filter((sub) => sub.cycle.type === "year(s)");
+    }
+    case "day": {
+      return subs.filter((sub) => sub.cycle.type === "day(s)");
     }
     default: {
       return subs;

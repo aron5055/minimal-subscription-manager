@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import { useI18n } from "@/contexts/LangContext";
 import { useSubscription } from "@/contexts/SubsContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import SubsDialog from "@/features/subscription/SubsDialog";
 import { getTextColorForBackground } from "@/lib/color";
 import { cn } from "@/lib/ui";
@@ -24,14 +25,17 @@ interface SubCardProps {
 export function SubscriptionCard({ sub }: SubCardProps) {
   const [{ cats }, dispatch] = useSubscription();
   const { t } = useI18n();
+  const { enableBackgroundColor } = useTheme();
 
   const isInactive = sub.status === "paused";
 
-  const textColor = getTextColorForBackground(sub.color);
+  const textColor = enableBackgroundColor
+    ? getTextColorForBackground(sub.color)
+    : "";
 
   // 为非活跃状态（过期或暂停）计算样式
   const getCardStyles = () => {
-    let backgroundColor = sub.color;
+    let backgroundColor = enableBackgroundColor ? sub.color : undefined;
     let opacity = "opacity-100";
     let brightness = "";
 
