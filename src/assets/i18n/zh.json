@@ -1,5 +1,9 @@
 {
   "title": "极简订阅管理",
+  "nosubs": {
+    "label": "暂无订阅",
+    "description": "点击下方的「+」按钮来添加你的第一个订阅吧！"
+  },
   "subscription": {
     "add": "添加订阅",
     "edit": "编辑订阅",

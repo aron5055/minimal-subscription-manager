@@ -1,5 +1,9 @@
 {
   "title": "Minimal Subscription Manager",
+  "nosubs": {
+    "label": "No Subscriptions",
+    "description": "Click the '+' button below to add your first subscription!"
+  },
   "subscription": {
     "add": "Add Subscription",
     "edit": "Edit Subscription",

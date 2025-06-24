@@ -68,12 +68,13 @@ export function ChartComponent({ data, title }: ChartProps) {
               wrapperStyle={{
                 paddingTop: "5px",
                 fontSize: "12px",
-                lineHeight: "1.2",
                 backgroundColor: "hsl(var(--card))",
                 borderRadius: "6px",
                 padding: "8px",
                 border: "1px solid hsl(var(--border))",
-                height: "auto",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
                 marginBottom: "1rem",
               }}
             />
