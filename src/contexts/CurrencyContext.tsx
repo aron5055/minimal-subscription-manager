@@ -1,5 +1,5 @@
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { createContext, useContext, type FC, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 
 const CurrencyContext = createContext<{
   currency: string;
@@ -9,7 +9,7 @@ const CurrencyContext = createContext<{
   setCurrency: () => {},
 });
 
-export const CurrencyProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export function CurrencyProvider({ children }: { children: ReactNode }) {
   const [currency, setCurrency] = useLocalStorage("currency", "USD");
 
   return (
@@ -17,8 +17,12 @@ export const CurrencyProvider: FC<{ children: ReactNode }> = ({ children }) => {
       {children}
     </CurrencyContext.Provider>
   );
-};
+}
 
 export function useCurrency() {
-  return useContext(CurrencyContext);
+  const context = useContext(CurrencyContext);
+  if (context === undefined) {
+    throw new Error("useCurrency must be used within a CurrencyProvider");
+  }
+  return context;
 }

@@ -1,7 +1,7 @@
 import en from "@/assets/i18n/en.json";
 import zh from "@/assets/i18n/zh.json";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { createContext, useContext, type FC, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { z } from "zod/v4";
 
 export type Lang = "en" | "zh";
@@ -23,7 +23,7 @@ const LangContext = createContext<{
   setLang: () => {},
 });
 
-export const I18nProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useLocalStorage<Lang>("i18n", () => {
     if (navigator.language.startsWith("zh")) {
       z.config(z.locales.zhCN());
@@ -39,8 +39,12 @@ export const I18nProvider: FC<{ children: ReactNode }> = ({ children }) => {
       {children}
     </LangContext.Provider>
   );
-};
+}
 
 export function useI18n() {
-  return useContext(LangContext);
+  const context = useContext(LangContext);
+  if (context === undefined) {
+    throw new Error("useI18n must be used within an I18nProvider");
+  }
+  return context;
 }

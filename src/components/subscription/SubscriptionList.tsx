@@ -1,6 +1,6 @@
+import { useFilter } from "@/contexts/FilterContext";
 import { useI18n } from "@/contexts/LangContext";
-import { useFilter } from "@/hooks/useFilter";
-import { useSort } from "@/hooks/useSort";
+import { useSort } from "@/contexts/SortContext";
 import { filterSubs, sortSubs } from "@/lib/subs";
 import {
   closestCenter,

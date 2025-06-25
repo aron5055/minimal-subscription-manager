@@ -1,5 +1,5 @@
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { createContext, useContext, useEffect, type FC, type ReactNode } from "react";
+import { createContext, useContext, useEffect, type ReactNode } from "react";
 
 const ThemeContext = createContext<{
   theme: "light" | "dark";
@@ -13,7 +13,7 @@ const ThemeContext = createContext<{
   setEnableBackgroundColor: () => {},
 });
 
-export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useLocalStorage<"light" | "dark">("theme", () => {
     if (
       window.matchMedia &&
@@ -44,8 +44,12 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
       {children}
     </ThemeContext.Provider>
   );
-};
+}
 
 export function useTheme() {
-  return useContext(ThemeContext);
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
 }

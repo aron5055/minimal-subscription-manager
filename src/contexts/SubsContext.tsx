@@ -8,7 +8,6 @@ import {
   useEffect,
   useMemo,
   useReducer,
-  type FC,
   type ReactNode,
 } from "react";
 
@@ -17,7 +16,7 @@ const SubsContext = createContext<[State, React.Dispatch<Action>]>([
   () => {},
 ]);
 
-export const SubsProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export function SubsProvider({ children }: { children: ReactNode }) {
   const [persisted, setPersisted] = useLocalStorage<State>("sm-state", {
     subs: [],
     cats: {},
@@ -32,10 +31,14 @@ export const SubsProvider: FC<{ children: ReactNode }> = ({ children }) => {
       {children}
     </SubsContext.Provider>
   );
-};
+}
 
 export function useSubscription() {
-  return useContext(SubsContext);
+  const context = useContext(SubsContext);
+  if (context === undefined) {
+    throw new Error("useSubscription must be used within a SubsProvider");
+  }
+  return context;
 }
 
 export function useAllCats() {
