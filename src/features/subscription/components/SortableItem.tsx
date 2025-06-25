@@ -6,11 +6,12 @@ import { SubscriptionCard } from "./SubscriptionCard";
 
 interface SortableItemProps {
   sub: Subscription;
+  disabled?: boolean;
 }
 
-export function SortableItem({ sub }: SortableItemProps) {
+export function SortableItem({ sub, disabled = false }: SortableItemProps) {
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: sub.id });
+    useSortable({ id: sub.id, disabled });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -18,14 +19,21 @@ export function SortableItem({ sub }: SortableItemProps) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} className="relative group">
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      className="relative group"
+    >
       <SubscriptionCard sub={sub} />
-      <div
-        {...listeners}
-        className="absolute top-2 right-2 p-1 rounded bg-black/10 hover:bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing"
-      >
-        <GripVertical size={16} className="text-white/80" />
-      </div>
+      {!disabled && (
+        <div
+          {...listeners}
+          className="absolute top-2 right-2 p-1 rounded bg-black/10 hover:bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing"
+        >
+          <GripVertical size={16} className="text-white/80" />
+        </div>
+      )}
     </div>
   );
 }

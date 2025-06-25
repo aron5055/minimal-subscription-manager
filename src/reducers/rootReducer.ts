@@ -33,7 +33,7 @@ function subReducer(subs: Subscription[], a: Action) {
       return a.payload;
     }
     case "TOGGLE_SUB_STATUS": {
-      const updatedSubs = subs.map((s) =>
+      return subs.map((s) =>
         s.id === a.id
           ? {
               ...s,
@@ -44,11 +44,6 @@ function subReducer(subs: Subscription[], a: Action) {
             }
           : s,
       );
-      // reorder
-      return [
-        ...updatedSubs.filter((s) => s.status === "active"),
-        ...updatedSubs.filter((s) => s.status === "paused"),
-      ];
     }
     case "MOVE_SUB": {
       // move subscription to a different category
@@ -89,7 +84,11 @@ export default function rootReducer(state: State, a: Action) {
     return a.payload;
   }
 
-  const subs = subReducer(state.subs, a);
+  let subs = subReducer(state.subs, a);
+  subs = [
+    ...subs.filter((s) => s.status === "active"),
+    ...subs.filter((s) => s.status === "paused"),
+  ];
   const cats = catReducer(state.cats, a);
 
   return state.subs === subs && state.cats === cats ? state : { subs, cats };

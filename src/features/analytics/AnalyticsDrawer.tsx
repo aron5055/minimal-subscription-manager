@@ -1,14 +1,6 @@
+import { DrawerWrapper } from "@/components/common/DrawerWrapper";
 import { Button } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { DrawerClose } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useI18n } from "@/contexts/LangContext";
@@ -31,7 +23,6 @@ export default function AnalyticsDrawer() {
     [subs],
   );
 
-  // 计算按订阅分组的数据
   const subscriptionData = useMemo(() => {
     if (!activeSubscriptions.length) return [];
 
@@ -47,7 +38,6 @@ export default function AnalyticsDrawer() {
       .filter((item) => item.value > 0);
   }, [activeSubscriptions, period]);
 
-  // 计算按分类分组的数据
   const categoryData = useMemo(() => {
     if (!activeSubscriptions.length) return [];
 
@@ -79,71 +69,52 @@ export default function AnalyticsDrawer() {
   }, [activeSubscriptions, categories, period]);
 
   return (
-    <Drawer>
-      <DrawerTrigger asChild>
+    <DrawerWrapper
+      title={t.analyse.label}
+      description={t.analyse.description}
+      trigger={
         <Button variant="ghost" aria-label={t.analyse.label}>
           <ChartPie style={{ width: "24px", height: "24px" }} />
         </Button>
-      </DrawerTrigger>
-      <DrawerContent className="max-h-[90vh]">
-        <div className="mx-auto w-full max-w-6xl">
-          <DrawerHeader className="pb-4">
-            <DrawerTitle className="text-center">{t.analyse.label}</DrawerTitle>
-            <DrawerDescription className="sr-only">
-              {t.analyse.description}
-            </DrawerDescription>
-          </DrawerHeader>
-
-          <ScrollArea className="h-[calc(90vh-120px)] px-4">
-            <div className="flex flex-col gap-4 mb-6">
-              <div className="flex justify-center">
-                <ToggleGroup
-                  type="single"
-                  value={period}
-                  onValueChange={(value) =>
-                    value && setPeriod(value as "monthly" | "yearly")
-                  }
-                  className="grid grid-cols-2 w-full max-w-xs mt-2"
-                >
-                  <ToggleGroupItem
-                    value="monthly"
-                    className="text-xs sm:text-sm"
-                  >
-                    {t.analyse.tabs.monthly}
-                  </ToggleGroupItem>
-                  <ToggleGroupItem
-                    value="yearly"
-                    className="text-xs sm:text-sm"
-                  >
-                    {t.analyse.tabs.yearly}
-                  </ToggleGroupItem>
-                </ToggleGroup>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-6">
-              <ChartComponent
-                data={subscriptionData}
-                title={
-                  period === "monthly" ? t.analyse.monthly : t.analyse.yearly
-                }
-              />
-              <ChartComponent
-                data={categoryData}
-                title={
-                  period === "monthly" ? t.analyse.monthly : t.analyse.yearly
-                }
-              />
-            </div>
-          </ScrollArea>
-
-          <DrawerFooter className="pt-2">
-            <DrawerClose asChild>
-              <Button variant="outline">{t.common.close}</Button>
-            </DrawerClose>
-          </DrawerFooter>
+      }
+      footer={
+        <DrawerClose asChild>
+          <Button variant="outline">{t.common.close}</Button>
+        </DrawerClose>
+      }
+    >
+      <ScrollArea className="h-[calc(90vh-120px)] px-4">
+        <div className="flex flex-col gap-4 mb-6">
+          <div className="flex justify-center">
+            <ToggleGroup
+              type="single"
+              value={period}
+              onValueChange={(value) =>
+                value && setPeriod(value as "monthly" | "yearly")
+              }
+              className="grid grid-cols-2 w-full max-w-xs mt-2"
+            >
+              <ToggleGroupItem value="monthly" className="text-xs sm:text-sm">
+                {t.analyse.tabs.monthly}
+              </ToggleGroupItem>
+              <ToggleGroupItem value="yearly" className="text-xs sm:text-sm">
+                {t.analyse.tabs.yearly}
+              </ToggleGroupItem>
+            </ToggleGroup>
+          </div>
         </div>
-      </DrawerContent>
-    </Drawer>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-6">
+          <ChartComponent
+            data={subscriptionData}
+            title={period === "monthly" ? t.analyse.monthly : t.analyse.yearly}
+          />
+          <ChartComponent
+            data={categoryData}
+            title={period === "monthly" ? t.analyse.monthly : t.analyse.yearly}
+          />
+        </div>
+      </ScrollArea>
+    </DrawerWrapper>
   );
 }

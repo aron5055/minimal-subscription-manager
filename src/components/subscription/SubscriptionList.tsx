@@ -1,4 +1,7 @@
 import { useI18n } from "@/contexts/LangContext";
+import { useFilter } from "@/hooks/useFilter";
+import { useSort } from "@/hooks/useSort";
+import { filterSubs, sortSubs } from "@/lib/subs";
 import {
   closestCenter,
   DndContext,
@@ -18,20 +21,43 @@ import {
   SortableContext,
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { useSubscription } from "../../contexts/SubsContext";
 import { CardItem } from "../../features/subscription/components/CardItem";
 import { SortableItem } from "../../features/subscription/components/SortableItem";
 
 export function SubscriptionList() {
   const { t } = useI18n();
-  const [{ subs }, dispatch] = useSubscription();
-  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
-  const [items, setItems] = useState(subs.map((sub) => sub.id));
+  const [{ subs, cats }, dispatch] = useSubscription();
+  const { sortType } = useSort();
+  const { filterType } = useFilter();
 
-  useEffect(() => {
-    setItems(subs.map((sub) => sub.id));
-  }, [subs]);
+  const displaySubs = useMemo(() => {
+    const sortedSubs = sortSubs(subs, sortType, cats);
+    return filterSubs(sortedSubs, filterType);
+  }, [subs, sortType, cats, filterType]);
+
+  // When sorting or filtering is applied, disable drag and drop
+  const isDragDisabled = useMemo(() => {
+    if (sortType !== null) {
+      return true;
+    }
+
+    const hasFilter = Object.values(filterType).some((value) => {
+      if (Array.isArray(value)) {
+        return value.length > 0;
+      }
+      return value !== null;
+    });
+    if (hasFilter) {
+      return true;
+    }
+
+    return false;
+  }, [sortType, filterType]);
+
+  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
+  const items = useMemo(() => displaySubs.map((sub) => sub.id), [displaySubs]);
 
   const sensors = useSensors(
     useSensor(MouseSensor, {
@@ -51,18 +77,17 @@ export function SubscriptionList() {
   );
 
   function handleDragEnd(event: DragEndEvent) {
+    if (isDragDisabled) return;
+
     const { active, over } = event;
 
     if (over && active.id !== over.id) {
-      setItems((items) => {
-        const oldIndex = items.indexOf(active.id as string);
-        const newIndex = items.indexOf(over.id as string);
+      const oldIndex = items.indexOf(active.id as string);
+      const newIndex = items.indexOf(over.id as string);
 
-        dispatch({
-          type: "REORDER",
-          payload: arrayMove(subs, oldIndex, newIndex),
-        });
-        return arrayMove(items, oldIndex, newIndex);
+      dispatch({
+        type: "REORDER",
+        payload: arrayMove(subs, oldIndex, newIndex),
       });
     }
 
@@ -70,6 +95,8 @@ export function SubscriptionList() {
   }
 
   function handleDragStart(event: DragStartEvent) {
+    if (isDragDisabled) return;
+
     const { active } = event;
     setActiveId(active.id);
   }
@@ -84,8 +111,14 @@ export function SubscriptionList() {
       <main className="flex-1 overflow-y-auto w-full p-6 min-h-0">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-7xl mx-auto">
           <SortableContext items={items} strategy={rectSortingStrategy}>
-            {subs.length > 0 ? (
-              subs.map((sub) => <SortableItem key={sub.id} sub={sub} />)
+            {displaySubs.length > 0 ? (
+              displaySubs.map((sub) => (
+                <SortableItem
+                  key={sub.id}
+                  sub={sub}
+                  disabled={isDragDisabled}
+                />
+              ))
             ) : (
               <div className="col-span-full flex flex-col items-center justify-center py-16 text-center">
                 <div className="text-6xl mb-4">( ˘▾˘)~♪</div>

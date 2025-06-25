@@ -1,95 +1,144 @@
+import { DrawerWrapper } from "@/components/common/DrawerWrapper";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { DrawerClose } from "@/components/ui/drawer";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { useI18n } from "@/contexts/LangContext";
-import { SortDesc } from "lucide-react";
+import { useFilter } from "@/hooks/useFilter";
+import { useSort } from "@/hooks/useSort";
+import type { SortType } from "@/lib/subs";
+import { ArrowUpDown, Filter, RotateCcw } from "lucide-react";
+import { useState } from "react";
 
 export function SortFilterMenu() {
   const { t } = useI18n();
+  const { sortType, setSortType } = useSort();
+  const { filterType, setFilterType, resetFilter, filterNums } = useFilter();
+  const [open, setOpen] = useState(false);
+
+  const resetAll = () => {
+    setSortType(null);
+    resetFilter();
+    setOpen(false);
+  };
+
+  const sortBy = [
+    { id: "sort-title", label: t.sort.by.title, value: "title" },
+    { id: "sort-date", label: t.sort.by.date, value: "date" },
+    { id: "sort-price-max", label: t.sort.by.priceMax, value: "priceMax" },
+    { id: "sort-price-min", label: t.sort.by.priceMin, value: "priceMin" },
+    { id: "sort-category", label: t.sort.by.category, value: "category" },
+  ];
 
   return (
-    <Drawer>
-      <DrawerTrigger className="focus:outline-none">
-        <SortDesc size={24} />
-      </DrawerTrigger>
-      <DrawerContent className="max-h-[90vh]">
-        <div className="mx-auto w-full max-w-6xl">
-          <DrawerHeader>
-            <DrawerTitle className="text-center">{`${t.sort.label}&${t.filter.label}`}</DrawerTitle>
-            <DrawerDescription className="sr-only">{`${t.sort.label}&${t.filter.label}`}</DrawerDescription>
-          </DrawerHeader>
-          <div className="flex justify-center">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-6">
-              <div>
-                <Label>{t.sort.label}</Label>
-                <RadioGroup>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option-one" id="option-title" />
-                    <Label htmlFor="option-title">{t.sort.by.title}</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option-five" id="option-date" />
-                    <Label htmlFor="option-date">{t.sort.by.date}</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option-two" id="option-price-max" />
-                    <Label htmlFor="option-price-max">
-                      {t.sort.by.priceMax}
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem
-                      value="option-three"
-                      id="option-price-min"
-                    />
-                    <Label htmlFor="option-price-min">
-                      {t.sort.by.priceMin}
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option-four" id="option-category" />
-                    <Label htmlFor="option-category">
-                      {t.sort.by.category}
-                    </Label>
-                  </div>
-                </RadioGroup>
-              </div>
-              <div>
-                <Label>{t.filter.label}</Label>
-                <div className="flex gap-2 items-center mb-1">
-                  <Checkbox id="filter-active" />
-                  <Label htmlFor="filter-active">{t.filter.by.active}</Label>
+    <DrawerWrapper
+      title={`${t.sort.label}&${t.filter.label}`}
+      description={`${t.sort.label}&${t.filter.label}`}
+      trigger={
+        <Button
+          variant="ghost"
+          className="relative focus:outline-none hover:bg-accent hover:text-accent-foreground rounded-lg p-2 transition-colors duration-150"
+        >
+          <ArrowUpDown size={24} />
+          {filterNums > 0 && (
+            <div className="absolute -top-1 -right-1 h-3 w-3 bg-primary rounded-full flex items-center justify-center">
+              <span className="text-[8px] text-primary-foreground font-medium">
+                {filterNums > 9 ? "9+" : filterNums}
+              </span>
+            </div>
+          )}
+        </Button>
+      }
+      footer={
+        <div className="flex gap-3 w-full max-w-md mx-auto">
+          <Button
+            variant="outline"
+            className="flex items-center justify-center gap-2 flex-1"
+            onClick={resetAll}
+          >
+            <RotateCcw size={16} />
+          </Button>
+          <DrawerClose asChild>
+            <Button variant="outline">{t.common.close}</Button>
+          </DrawerClose>
+        </div>
+      }
+      open={open}
+      onOpenChange={setOpen}
+    >
+      <ScrollArea className="h-[calc(90vh-120px)] px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-4">
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 mb-3">
+              <ArrowUpDown size={16} className="text-primary" />
+              <Label className="text-base font-medium">{t.sort.label}</Label>
+            </div>
+            <RadioGroup
+              value={sortType}
+              onValueChange={(value) => setSortType(value as SortType)}
+            >
+              {sortBy.map(({ id, label, value }) => (
+                <div
+                  key={id}
+                  className="flex items-center space-x-3 p-2 rounded-lg hover:bg-muted/50 transition-colors"
+                >
+                  <RadioGroupItem value={value} id={id} />
+                  <Label htmlFor={id} className="text-sm cursor-pointer flex-1">
+                    {label}
+                  </Label>
                 </div>
-                <div className="flex gap-2 items-center">
-                  <Checkbox id="filter-paused" />
-                  <Label htmlFor="filter-paused">{t.filter.by.paused}</Label>
-                </div>
-                <div>
-                  <Label>{t.filter.by.category}</Label>
-                  <div></div>
-                </div>
-              </div>
+              ))}
+            </RadioGroup>
+          </div>
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Filter size={16} className="text-primary" />
+              <Label className="text-base font-medium">{t.filter.label}</Label>
+            </div>
+            <div className="flex gap-2 items-center mb-1">
+              <Checkbox
+                id="filter-active"
+                checked={filterType.active === true}
+                onCheckedChange={(checked) =>
+                  setFilterType({
+                    ...filterType,
+                    active:
+                      checked === true
+                        ? true
+                        : checked === false
+                          ? false
+                          : null,
+                  })
+                }
+              />
+              <Label htmlFor="filter-active">{t.filter.by.active}</Label>
+            </div>
+            <div className="flex gap-2 items-center">
+              <Checkbox
+                id="filter-paused"
+                checked={filterType.paused === true}
+                onCheckedChange={(checked) =>
+                  setFilterType({
+                    ...filterType,
+                    paused:
+                      checked === true
+                        ? true
+                        : checked === false
+                          ? false
+                          : null,
+                  })
+                }
+              />
+              <Label htmlFor="filter-paused">{t.filter.by.paused}</Label>
+            </div>
+            <div>
+              <Label>{t.filter.by.category}</Label>
             </div>
           </div>
-
-          <DrawerFooter className="pt-2">
-            <DrawerClose asChild>
-              <Button variant="outline">{t.common.close}</Button>
-            </DrawerClose>
-          </DrawerFooter>
         </div>
-      </DrawerContent>
-    </Drawer>
+      </ScrollArea>
+    </DrawerWrapper>
   );
 }
