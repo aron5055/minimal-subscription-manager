@@ -43,6 +43,7 @@ export const BillingCycleField = forwardRef<
         onValueChange={(type: CycleType["type"]) =>
           onChange({ ...value, type })
         }
+        name={t.subscription.form.cycle.label}
       >
         <SelectTrigger>
           <SelectValue />

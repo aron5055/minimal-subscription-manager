@@ -46,38 +46,30 @@ type Nullable<T> = T | null;
 export type FilterType = {
   active: Nullable<boolean>;
   paused: Nullable<boolean>;
-  category: string[];
   month: Nullable<boolean>;
   year: Nullable<boolean>;
   day: Nullable<boolean>;
+  category: string[];
 };
 
 export function filterSubs(subs: Subscription[], filters: FilterType) {
   return subs.filter((sub) => {
-    if (filters.active && sub.status !== "active") {
-      return false;
+    const statusFilters: string[] = [];
+    if (filters.active) {
+      statusFilters.push("active");
     }
-    if (filters.paused && sub.status !== "paused") {
-      return false;
-    }
-
-    if (
-      filters.category.length > 0 &&
-      !filters.category.includes(sub.categoryId)
-    ) {
-      return false;
+    if (filters.paused) {
+      statusFilters.push("paused");
     }
 
-    if (filters.month && sub.cycle.type !== "month(s)") {
-      return false;
-    }
-    if (filters.year && sub.cycle.type !== "year(s)") {
-      return false;
-    }
-    if (filters.day && sub.cycle.type !== "day(s)") {
-      return false;
-    }
-
-    return true;
+    const conditions = [
+      statusFilters.length === 0 || statusFilters.includes(sub.status),
+      filters.category.length === 0 ||
+        filters.category.includes(sub.categoryId),
+      !filters.month || sub.cycle.type === "month(s)",
+      !filters.year || sub.cycle.type === "year(s)",
+      !filters.day || sub.cycle.type === "day(s)",
+    ];
+    return conditions.every(Boolean);
   });
 }

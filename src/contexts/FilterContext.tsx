@@ -1,6 +1,12 @@
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import type { FilterType } from "@/lib/subs";
-import { createContext, useContext, useMemo, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 
 export type FilterContextType = {
   filterType: FilterType;
@@ -29,14 +35,15 @@ export function FilterProvider({ children }: { children: ReactNode }) {
     {
       active: null,
       paused: null,
-      category: [],
       month: null,
       year: null,
       day: null,
+      category: [],
     },
   );
+  const [filterNums, setFilterNums] = useState(0);
 
-  const filterNums = useMemo(() => {
+  useMemo(() => {
     let nums = 0;
     for (const value of Object.values(filterType)) {
       if (Array.isArray(value)) {
@@ -45,17 +52,17 @@ export function FilterProvider({ children }: { children: ReactNode }) {
         nums += 1;
       }
     }
-    return nums;
+    setFilterNums(nums);
   }, [filterType]);
 
   const resetFilter = () => {
     setFilterType({
       active: null,
       paused: null,
-      category: [],
       month: null,
       year: null,
       day: null,
+      category: [],
     });
   };
 

@@ -98,7 +98,8 @@
   "common": {
     "close": "Close",
     "cancel": "Cancel",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "reset": "Reset"
   },
   "analyse": {
     "label": "Data Analysis",
@@ -126,9 +127,14 @@
   "filter": {
     "label": "Filter",
     "by": {
+      "status": "By Status",
       "active": "Show Active Subscriptions",
       "paused": "Show Paused Subscriptions",
-      "category": "Filter by Category"
+      "category": "Filter by Category",
+      "date": "Subscription Type",
+      "month": "Monthly Subscription",
+      "year": "Yearly Subscription",
+      "day": "Daily Subscription"
     }
   },
   "error": {

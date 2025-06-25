@@ -1,6 +1,5 @@
 export * from "./color";
 export * from "./cost";
-export * from "./data";
 export * from "./date";
 export * from "./dev";
 export * from "./form";

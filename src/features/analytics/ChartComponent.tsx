@@ -76,6 +76,7 @@ export function ChartComponent({ data, title }: ChartProps) {
                 justifyContent: "center",
                 alignItems: "center",
                 marginBottom: "1rem",
+                height: "auto",
               }}
             />
           </PieChart>

@@ -41,10 +41,6 @@ export const CurrencyPicker = forwardRef<
     });
   }, [searchTerm]);
 
-  const selectedCurrency = value
-    ? `${getSymbolFromCurrency(value)} ${value}`
-    : t.subscription.form.currency;
-
   const handleSelect = (selectedCode: string) => {
     onChange(selectedCode);
     setIsOpen(false);
@@ -60,10 +56,13 @@ export const CurrencyPicker = forwardRef<
           variant="outline"
           role="combobox"
           aria-expanded={isOpen}
-          className="w-full"
+          className="w-full flex"
           onBlur={onBlur}
         >
-          {selectedCurrency}
+          <div>
+            <span className="ml-2">{getSymbolFromCurrency(value)}</span>
+            <span className="ml-2">{value}</span>
+          </div>
           <ChevronDown className="h-4 w-4 opacity-50" />
         </Button>
       </DropdownMenuTrigger>

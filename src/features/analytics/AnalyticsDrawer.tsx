@@ -7,7 +7,7 @@ import { useI18n } from "@/contexts/LangContext";
 import { useAllCats, useSubscription } from "@/contexts/SubsContext";
 import { generateSoftColor } from "@/lib/color";
 import { calculateMonthlyCost, calculateYearlyCost } from "@/lib/cost";
-import { ChartPie } from "lucide-react";
+import { ChartPie, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { ChartComponent } from "./ChartComponent";
 
@@ -79,7 +79,10 @@ export default function AnalyticsDrawer() {
       }
       footer={
         <DrawerClose asChild>
-          <Button variant="outline">{t.common.close}</Button>
+          <Button variant="outline">
+            <X size={16} />
+            {t.common.close}
+          </Button>
         </DrawerClose>
       }
     >
