@@ -6,7 +6,7 @@ import type { Icon, Subscription } from "@/types/types";
 import type { UseFormReturn } from "react-hook-form";
 import { AvatarPicker } from "./AvatarPicker";
 import { CurrencyPicker } from "./CurrencyPicker";
-import { PresetPicker } from "./PresetPicker";
+import { PresetsPicker } from "./PresetsPicker";
 
 interface IconPriceSectionProps {
   form: UseFormReturn<Partial<Subscription>>;
@@ -15,6 +15,15 @@ interface IconPriceSectionProps {
 
 export function IconPriceSection({ form, clearIcon }: IconPriceSectionProps) {
   const { t } = useI18n();
+
+  const handlePresetSelect = (preset: Subscription) => {
+    const presetData = {
+      ...preset,
+      startDate: new Date().toISOString().split("T")[0],
+    };
+
+    form.reset(presetData);
+  };
 
   return (
     <div className="space-y-4">
@@ -36,10 +45,10 @@ export function IconPriceSection({ form, clearIcon }: IconPriceSectionProps) {
             </FormItemWrapper>
           )}
         />
-        <PresetPicker />
+        <PresetsPicker onSelectPreset={handlePresetSelect} />
       </div>
 
-      {/* 价格和货币 */}
+      {/* Price and Currency */}
       <div className="flex items-center justify-center gap-2">
         <FormField
           control={form.control}
@@ -54,9 +63,9 @@ export function IconPriceSection({ form, clearIcon }: IconPriceSectionProps) {
                 {...field}
                 onChange={(e) => {
                   const value = e.target.value;
-                  // 移除非数字和小数点的字符，保留数字格式
+                  // remove all non-numeric characters except for the decimal point
                   const numericValue = value.replace(/[^\d.]/g, "");
-                  // 确保只有一个小数点
+                  // only allow one decimal point
                   const parts = numericValue.split(".");
                   const formattedValue =
                     parts.length > 2

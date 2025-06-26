@@ -7,7 +7,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useI18n } from "@/contexts/lang";
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 
 interface ColorPickerProps {
@@ -23,6 +23,10 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(
     const { t } = useI18n();
     const [color, setColor] = useState(value);
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+      setColor(value);
+    }, [value]);
 
     const handleChange = (newColor: string) => {
       setColor(newColor);
