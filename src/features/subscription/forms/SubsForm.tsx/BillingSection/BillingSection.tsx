@@ -5,7 +5,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useI18n } from "@/contexts/LangContext";
+import { useI18n } from "@/contexts/lang";
 import type { Subscription } from "@/types/types";
 import { parseISO } from "date-fns";
 import type { UseFormReturn } from "react-hook-form";

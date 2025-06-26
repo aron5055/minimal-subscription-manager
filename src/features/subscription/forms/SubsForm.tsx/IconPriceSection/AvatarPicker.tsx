@@ -1,7 +1,7 @@
 import { DialogWrapper } from "@/components/common/DialogWrapper";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { useI18n } from "@/contexts/LangContext";
+import { useI18n } from "@/contexts/lang";
 import { GenericIcons, renderIcon, type BuiltinIcon } from "@/lib/icon";
 import type { Icon } from "@/types/types";
 import { forwardRef, useState } from "react";

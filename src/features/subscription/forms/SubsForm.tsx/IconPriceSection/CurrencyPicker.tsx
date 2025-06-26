@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { useI18n } from "@/contexts/LangContext";
+import { useI18n } from "@/contexts/lang";
 import getSymbolFromCurrency from "currency-symbol-map";
 import { ChevronDown, Search } from "lucide-react";
 import { forwardRef, useMemo, useState } from "react";

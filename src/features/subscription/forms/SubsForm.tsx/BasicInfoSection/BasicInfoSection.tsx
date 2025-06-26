@@ -8,7 +8,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useI18n } from "@/contexts/LangContext";
+import { useI18n } from "@/contexts/lang";
 import type { Icon, Subscription } from "@/types/types";
 import type { UseFormReturn } from "react-hook-form";
 

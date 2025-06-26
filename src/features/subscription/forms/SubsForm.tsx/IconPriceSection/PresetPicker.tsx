@@ -1,6 +1,6 @@
 import { DialogWrapper } from "@/components/common/DialogWrapper";
 import { Button } from "@/components/ui/button";
-import { useI18n } from "@/contexts/LangContext";
+import { useI18n } from "@/contexts/lang";
 
 export function PresetPicker() {
   const { t } = useI18n();

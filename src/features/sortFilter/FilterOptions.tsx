@@ -1,7 +1,7 @@
 import { Label } from "@/components/ui/label";
-import { useFilter } from "@/contexts/FilterContext";
-import { useI18n } from "@/contexts/LangContext";
-import { useAllCats } from "@/contexts/SubsContext";
+import { useFilter } from "@/contexts/filter";
+import { useI18n } from "@/contexts/lang";
+import { useAllCats } from "@/contexts/subscription";
 import type { FilterType } from "@/lib/subs";
 import { Filter } from "lucide-react";
 import { CheckboxField } from "./CheckboxField";

@@ -1,8 +1,8 @@
 import { FormItemWrapper } from "@/components/common/FormItemWrapper";
 import { Form, FormField } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { useCurrency } from "@/contexts/CurrencyContext";
-import { useI18n } from "@/contexts/LangContext";
+import { useCurrency } from "@/contexts/currency";
+import { useI18n } from "@/contexts/lang";
 import makeFormSchema from "@/lib/form";
 import type { Icon, Subscription } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";

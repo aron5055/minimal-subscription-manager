@@ -2,8 +2,8 @@ import { AlertDialogWrapper } from "@/components/common/AlertDialogWrapper";
 import { DialogWrapper } from "@/components/common/DialogWrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useI18n } from "@/contexts/LangContext";
-import { useAllCats, useSubscription } from "@/contexts/SubsContext";
+import { useI18n } from "@/contexts/lang";
+import { useAllCats, useSubscription } from "@/contexts/subscription";
 import type { Category } from "@/types/types";
 import { Pencil, Plus, Settings, Trash2 } from "lucide-react";
 import { nanoid } from "nanoid";
@@ -11,7 +11,7 @@ import { useState } from "react";
 
 export function CategoryManage() {
   const { t } = useI18n();
-  const [_, dispatch] = useSubscription();
+  const { dispatch } = useSubscription();
   const categories = useAllCats();
   const [open, setOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);

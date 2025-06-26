@@ -1,7 +1,7 @@
 import { AlertDialogWrapper } from "@/components/common/AlertDialogWrapper";
 import { Button } from "@/components/ui/button";
-import { useI18n } from "@/contexts/LangContext";
-import { useSubscription } from "@/contexts/SubsContext";
+import { useI18n } from "@/contexts/lang";
+import { useSubscription } from "@/contexts/subscription";
 import { Trash } from "lucide-react";
 import { forwardRef } from "react";
 
@@ -13,7 +13,7 @@ interface DeleteDialogProps {
 export const DeleteDialog = forwardRef<HTMLButtonElement, DeleteDialogProps>(
   ({ subId, title }, ref) => {
     const { t } = useI18n();
-    const [_, dispatch] = useSubscription();
+    const { dispatch } = useSubscription();
 
     return (
       <AlertDialogWrapper

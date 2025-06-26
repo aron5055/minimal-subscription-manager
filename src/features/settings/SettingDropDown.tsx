@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
-import { useI18n } from "@/contexts/LangContext";
+import { useI18n } from "@/contexts/lang";
 import { Settings } from "lucide-react";
 import { CurrencyMenu } from "./CurrencyMenu";
 import { ImportExportMenu } from "./ImportExportMenu";

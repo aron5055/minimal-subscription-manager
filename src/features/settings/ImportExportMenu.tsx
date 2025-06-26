@@ -1,6 +1,6 @@
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { useI18n } from "@/contexts/LangContext";
-import { useSubscription } from "@/contexts/SubsContext";
+import { useI18n } from "@/contexts/lang";
+import { useSubscription } from "@/contexts/subscription";
 import { exportBlobSchema, type State } from "@/types/types";
 import { Download, Upload } from "lucide-react";
 import { useRef } from "react";
@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 export function ImportExportMenu() {
   const { t } = useI18n();
-  const [state, dispatch] = useSubscription();
+  const { state, dispatch } = useSubscription();
   const fileRef = useRef<HTMLInputElement>(null);
 
   function exportData(state: State): void {

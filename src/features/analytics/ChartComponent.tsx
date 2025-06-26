@@ -1,4 +1,4 @@
-import { useI18n } from "@/contexts/LangContext";
+import { useI18n } from "@/contexts/lang";
 import {
   Cell,
   Legend,

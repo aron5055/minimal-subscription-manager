@@ -1,4 +1,4 @@
-import { useI18n } from "@/contexts/LangContext";
+import { useI18n } from "@/contexts/lang";
 import AnalyticsDrawer from "@/features/analytics/AnalyticsDrawer";
 import { SortFilterMenu } from "@/features/sortFilter/SortFilterMenu";
 import SubsDialog from "@/features/subscription/SubsDialog";

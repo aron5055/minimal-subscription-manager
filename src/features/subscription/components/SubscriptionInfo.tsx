@@ -1,5 +1,5 @@
 import { Avatar } from "@/components/ui/avatar";
-import { useI18n } from "@/contexts/LangContext";
+import { useI18n } from "@/contexts/lang";
 import { daysLeft, isSubscriptionExpired } from "@/lib/date";
 import { renderIcon } from "@/lib/icon";
 import type { Subscription } from "@/types/types";

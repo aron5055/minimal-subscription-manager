@@ -1,7 +1,7 @@
 import { DialogWrapper } from "@/components/common/DialogWrapper";
 import { Button } from "@/components/ui/button";
-import { useI18n } from "@/contexts/LangContext";
-import { useSubscription } from "@/contexts/SubsContext";
+import { useI18n } from "@/contexts/lang";
+import { useSubscription } from "@/contexts/subscription";
 import { type Subscription } from "@/types/types";
 import { useState, type ReactElement } from "react";
 import { SubsForm } from "./forms/SubsForm.tsx/SubsForm";
@@ -18,7 +18,7 @@ export default function SubsDialog({
   mode = "add",
 }: SubsDialogProps) {
   const { t } = useI18n();
-  const [_, dispatch] = useSubscription();
+  const { dispatch } = useSubscription();
   const [open, setOpen] = useState(false);
   const formId = "subscription-form";
 

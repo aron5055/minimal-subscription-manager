@@ -1,7 +1,7 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useI18n } from "@/contexts/LangContext";
-import { useSort } from "@/contexts/SortContext";
+import { useI18n } from "@/contexts/lang";
+import { useSort } from "@/contexts/sort";
 import type { SortType } from "@/lib/subs";
 import { ArrowUpDown } from "lucide-react";
 

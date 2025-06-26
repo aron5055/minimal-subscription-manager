@@ -1,6 +1,6 @@
 import { FormItemWrapper } from "@/components/common/FormItemWrapper";
 import { FormField } from "@/components/ui/form";
-import { useI18n } from "@/contexts/LangContext";
+import { useI18n } from "@/contexts/lang";
 import type { Subscription } from "@/types/types";
 import type { UseFormReturn } from "react-hook-form";
 import { CategoryPicker } from "./CategoryPicker";

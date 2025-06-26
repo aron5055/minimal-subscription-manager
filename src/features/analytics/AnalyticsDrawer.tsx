@@ -2,8 +2,8 @@ import { DrawerWrapper } from "@/components/common/DrawerWrapper";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { useI18n } from "@/contexts/LangContext";
-import { useAllCats, useSubscription } from "@/contexts/SubsContext";
+import { useI18n } from "@/contexts/lang";
+import { useAllCats, useSubscription } from "@/contexts/subscription";
 import { generateSoftColor } from "@/lib/color";
 import { calculateMonthlyCost, calculateYearlyCost } from "@/lib/cost";
 import { ChartPie } from "lucide-react";
@@ -12,13 +12,13 @@ import { ChartComponent } from "./ChartComponent";
 
 export default function AnalyticsDrawer() {
   const { t } = useI18n();
-  const [{ subs }] = useSubscription();
+  const { state } = useSubscription();
   const categories = useAllCats();
   const [period, setPeriod] = useState<"monthly" | "yearly">("monthly");
 
   const activeSubscriptions = useMemo(
-    () => subs.filter((sub) => sub.status === "active"),
-    [subs],
+    () => state.subs.filter((sub) => sub.status === "active"),
+    [state.subs],
   );
 
   const subscriptionData = useMemo(() => {

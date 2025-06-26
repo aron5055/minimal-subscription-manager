@@ -4,8 +4,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useI18n } from "@/contexts/LangContext";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useI18n } from "@/contexts/lang";
+import { useTheme } from "@/contexts/theme";
 import { Check, Palette } from "lucide-react";
 
 export function ThemeMenu() {

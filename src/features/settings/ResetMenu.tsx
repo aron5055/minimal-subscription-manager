@@ -1,13 +1,13 @@
 import { AlertDialogWrapper } from "@/components/common/AlertDialogWrapper";
 import { Button } from "@/components/ui/button";
-import { useI18n } from "@/contexts/LangContext";
-import { useSubscription } from "@/contexts/SubsContext";
+import { useI18n } from "@/contexts/lang";
+import { useSubscription } from "@/contexts/subscription";
 import { X } from "lucide-react";
 import { forwardRef } from "react";
 
 export const ResetMenu = forwardRef<HTMLButtonElement>(({}, ref) => {
   const { t } = useI18n();
-  const [_, dispatch] = useSubscription();
+  const { dispatch } = useSubscription();
 
   return (
     <AlertDialogWrapper

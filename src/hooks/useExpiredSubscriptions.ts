@@ -1,4 +1,4 @@
-import { useSubscription } from "@/contexts/SubsContext";
+import { useSubscription } from "@/contexts/subscription";
 import { isSubscriptionExpired } from "@/lib/date";
 import type { Subscription } from "@/types/types";
 import { useEffect } from "react";
@@ -8,11 +8,11 @@ import { useEffect } from "react";
  * Checks for expired subscriptions on mount and sets up periodic checks
  */
 export function useExpiredSubscriptions() {
-  const [{ subs }, dispatch] = useSubscription();
+  const { state, dispatch } = useSubscription();
 
   const checkAndPauseExpiredSubscriptions = () => {
     // Find all active subscriptions that have expired
-    const expiredSubs = subs.filter((sub: Subscription) => {
+    const expiredSubs = state.subs.filter((sub: Subscription) => {
       return sub.status === "active" && isSubscriptionExpired(sub);
     });
 
@@ -54,7 +54,7 @@ export function useExpiredSubscriptions() {
     ); // Check every hour
 
     return () => clearInterval(interval);
-  }, [subs, dispatch]);
+  }, [state.subs, dispatch]);
 
   return { checkAndPauseExpiredSubscriptions };
 }

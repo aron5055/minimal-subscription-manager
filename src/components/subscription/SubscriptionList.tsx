@@ -1,6 +1,9 @@
-import { useFilter } from "@/contexts/FilterContext";
-import { useI18n } from "@/contexts/LangContext";
-import { useSort } from "@/contexts/SortContext";
+import { useFilter } from "@/contexts/filter";
+import { useI18n } from "@/contexts/lang";
+import { useSort } from "@/contexts/sort";
+import { useSubscription } from "@/contexts/subscription";
+import { CardItem } from "@/features/subscription/components/CardItem";
+import { SortableItem } from "@/features/subscription/components/SortableItem";
 import { filterSubs, sortSubs } from "@/lib/subs";
 import {
   closestCenter,
@@ -22,20 +25,17 @@ import {
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import { useMemo, useState } from "react";
-import { useSubscription } from "../../contexts/SubsContext";
-import { CardItem } from "../../features/subscription/components/CardItem";
-import { SortableItem } from "../../features/subscription/components/SortableItem";
 
 export function SubscriptionList() {
   const { t } = useI18n();
-  const [{ subs, cats }, dispatch] = useSubscription();
+  const { state, dispatch } = useSubscription();
   const { sortType } = useSort();
   const { filterType } = useFilter();
 
   const displaySubs = useMemo(() => {
-    const sortedSubs = sortSubs(subs, sortType, cats);
+    const sortedSubs = sortSubs(state.subs, sortType, state.cats);
     return filterSubs(sortedSubs, filterType);
-  }, [subs, sortType, cats, filterType]);
+  }, [state.subs, sortType, state.cats, filterType]);
 
   // When sorting or filtering is applied, disable drag and drop
   const isDragDisabled = useMemo(() => {
@@ -87,7 +87,7 @@ export function SubscriptionList() {
 
       dispatch({
         type: "REORDER",
-        payload: arrayMove(subs, oldIndex, newIndex),
+        payload: arrayMove(state.subs, oldIndex, newIndex),
       });
     }
 

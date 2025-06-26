@@ -1,17 +1,6 @@
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { createContext, useContext, useEffect, type ReactNode } from "react";
-
-const ThemeContext = createContext<{
-  theme: "light" | "dark";
-  setTheme: (theme: "light" | "dark") => void;
-  enableBackgroundColor: boolean;
-  setEnableBackgroundColor: (b: boolean) => void;
-}>({
-  theme: "light",
-  setTheme: () => {},
-  enableBackgroundColor: false,
-  setEnableBackgroundColor: () => {},
-});
+import { useEffect, type ReactNode } from "react";
+import { ThemeContext } from "./ThemeContext";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useLocalStorage<"light" | "dark">("theme", () => {
@@ -44,12 +33,4 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       {children}
     </ThemeContext.Provider>
   );
-}
-
-export function useTheme() {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
-  return context;
 }

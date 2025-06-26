@@ -7,9 +7,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useI18n } from "@/contexts/LangContext";
-import { useSubscription } from "@/contexts/SubsContext";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useI18n } from "@/contexts/lang";
+import { useSubscription } from "@/contexts/subscription";
+import { useTheme } from "@/contexts/theme";
 import SubsDialog from "@/features/subscription/SubsDialog";
 import { getTextColorForBackground } from "@/lib/color";
 import { cn } from "@/lib/ui";
@@ -23,7 +23,7 @@ interface SubCardProps {
 }
 
 export function SubscriptionCard({ sub }: SubCardProps) {
-  const [{ cats }, dispatch] = useSubscription();
+  const { state, dispatch } = useSubscription();
   const { t } = useI18n();
   const { enableBackgroundColor } = useTheme();
 
@@ -35,7 +35,7 @@ export function SubscriptionCard({ sub }: SubCardProps) {
 
   // For inactive subscriptions, we want to apply a dimming effect
   const getCardStyles = () => {
-    let backgroundColor = enableBackgroundColor ? sub.color : undefined;
+    const backgroundColor = enableBackgroundColor ? sub.color : undefined;
     let opacity = "opacity-100";
     let brightness = "";
 
@@ -62,6 +62,7 @@ export function SubscriptionCard({ sub }: SubCardProps) {
         opacity,
         brightness,
       )}
+      type="button"
       style={{
         backgroundColor,
       }}
@@ -120,7 +121,7 @@ export function SubscriptionCard({ sub }: SubCardProps) {
             <div className="flex items-center gap-3 p-3 bg-muted/20 rounded-md">
               <Folder size={16} className="text-muted-foreground" />
               <span className="text-sm font-medium">
-                {cats[sub.categoryId]?.name ?? t.analyse.uncategorized}
+                {state.cats[sub.categoryId]?.name ?? t.analyse.uncategorized}
               </span>
             </div>
 

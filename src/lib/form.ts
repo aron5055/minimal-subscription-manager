@@ -1,4 +1,4 @@
-import type { Translation } from "@/contexts/LangContext";
+import type { Translation } from "@/contexts/lang";
 import { subSchema } from "@/types/types";
 import { z } from "zod/v4";
 

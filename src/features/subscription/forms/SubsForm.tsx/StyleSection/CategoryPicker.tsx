@@ -4,7 +4,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useI18n } from "@/contexts/LangContext";
+import { useI18n } from "@/contexts/lang";
 
 import {
   Command,
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/command";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useAllCats } from "@/contexts/SubsContext";
+import { useAllCats } from "@/contexts/subscription";
 import { ChevronDown, Pencil, X } from "lucide-react";
 import { forwardRef, useState } from "react";
 import { CategoryManage } from "./CategoryManage";

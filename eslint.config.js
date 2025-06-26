@@ -1,10 +1,10 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
-import reactX from "eslint-plugin-react-x";
+import js from "@eslint/js";
 import reactDom from "eslint-plugin-react-dom";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import reactX from "eslint-plugin-react-x";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   { ignores: ["dist"] },
@@ -17,6 +17,10 @@ export default tseslint.config(
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      parserOptions: {
+        project: "./tsconfig.app.json",
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
     plugins: {
       "react-hooks": reactHooks,
@@ -33,5 +37,5 @@ export default tseslint.config(
       ...reactX.configs["recommended-typescript"].rules,
       ...reactDom.configs.recommended.rules,
     },
-  }
+  },
 );

@@ -11,8 +11,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useCurrency } from "@/contexts/CurrencyContext";
-import { useI18n } from "@/contexts/LangContext";
+import { useCurrency } from "@/contexts/currency";
+import { useI18n } from "@/contexts/lang";
 import getSymbolFromCurrency from "currency-symbol-map";
 import { Check, DollarSign } from "lucide-react";
 
