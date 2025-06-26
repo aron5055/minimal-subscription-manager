@@ -135,5 +135,11 @@
   },
   "error": {
     "endAfter": "结束日期必须在开始日期之后或留空"
+  },
+  "accessibility": {
+    "btn": {
+      "sortFilter": "打开排序和过滤菜单",
+      "datePicker": "当前日期："
+    }
   }
 }

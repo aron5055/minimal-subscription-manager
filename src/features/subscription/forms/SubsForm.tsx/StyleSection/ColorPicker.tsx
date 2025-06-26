@@ -22,6 +22,7 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(
   ({ id, value, onChange, onBlur }, ref) => {
     const { t } = useI18n();
     const [color, setColor] = useState(value);
+    const [open, setOpen] = useState(false);
 
     const handleChange = (newColor: string) => {
       setColor(newColor);
@@ -29,7 +30,7 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(
     };
 
     return (
-      <Popover>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id={id}
@@ -37,6 +38,9 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(
             ref={ref}
             variant="ghost"
             className="flex items-center justify-between p-4 border-2 rounded-lg h-10 w-full"
+            aria-expanded={open}
+            aria-haspopup="dialog"
+            aria-controls="color-popover-content"
           >
             <span>{t.subscription.form.color.label}</span>
             <span

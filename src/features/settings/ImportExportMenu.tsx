@@ -35,6 +35,7 @@ export function ImportExportMenu() {
   const importData = async () => {
     const file = fileRef.current?.files?.[0];
     if (!file) return;
+
     try {
       const text = await file.text();
       const parsed = exportBlobSchema.parse(JSON.parse(text));

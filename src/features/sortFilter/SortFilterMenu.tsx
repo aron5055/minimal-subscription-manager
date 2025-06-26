@@ -1,11 +1,10 @@
 import { DrawerWrapper } from "@/components/common/DrawerWrapper";
 import { Button } from "@/components/ui/button";
-import { DrawerClose } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useFilter } from "@/contexts/FilterContext";
 import { useI18n } from "@/contexts/LangContext";
 import { useSort } from "@/contexts/SortContext";
-import { ArrowUpDown, RotateCcw, X } from "lucide-react";
+import { ArrowUpDown, RotateCcw } from "lucide-react";
 import { useState } from "react";
 import { FilterOptions } from "./FilterOptions";
 import { SortOptions } from "./SortOptions";
@@ -26,7 +25,7 @@ export function SortFilterMenu() {
     <Button
       variant="ghost"
       className="relative focus:outline-none hover:bg-accent hover:text-accent-foreground rounded-lg p-2 transition-colors duration-150"
-      aria-label={`${t.sort.label}&${t.filter.label}`}
+      aria-label={t.accessibility.btn.sortFilter}
     >
       <ArrowUpDown
         style={{
@@ -45,22 +44,14 @@ export function SortFilterMenu() {
   );
 
   const footer = (
-    <div className="flex gap-3 w-full max-w-md mx-auto">
-      <Button
-        variant="outline"
-        className="flex items-center justify-center gap-2 flex-1"
-        onClick={resetAll}
-      >
-        <RotateCcw size={16} />
-        {t.common.reset}
-      </Button>
-      <DrawerClose asChild>
-        <Button variant="outline">
-          <X size={16} />
-          {t.common.close}
-        </Button>
-      </DrawerClose>
-    </div>
+    <Button
+      variant="outline"
+      className="w-full flex items-center justify-center gap-2 flex-1"
+      onClick={resetAll}
+    >
+      <RotateCcw size={16} />
+      {t.common.reset}
+    </Button>
   );
 
   return (

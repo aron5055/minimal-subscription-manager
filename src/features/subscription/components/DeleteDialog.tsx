@@ -27,6 +27,7 @@ export const DeleteDialog = forwardRef<HTMLButtonElement, DeleteDialogProps>(
             variant="outline"
             ref={ref}
             className="flex items-center gap-2 h-8"
+            aria-label={t.card.delete.label}
           >
             <Trash />
           </Button>

@@ -139,5 +139,11 @@
   },
   "error": {
     "endAfter": "End date must be after start date or left empty"
+  },
+  "accessibility": {
+    "btn": {
+      "sortFilter": "Open Sort and Filter Menu",
+      "datePicker": "Current Date:"
+    }
   }
 }

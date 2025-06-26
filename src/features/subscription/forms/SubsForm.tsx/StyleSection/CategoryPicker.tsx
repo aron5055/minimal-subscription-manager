@@ -44,6 +44,8 @@ export const CategoryPicker = forwardRef<
           ref={ref}
           variant="outline"
           className="w-full justify-start h-10"
+          aria-expanded={open}
+          aria-haspopup="listbox"
         >
           {current === undefined ? (
             <span className="text-muted-foreground">

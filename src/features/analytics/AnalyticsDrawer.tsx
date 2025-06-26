@@ -1,17 +1,15 @@
 import { DrawerWrapper } from "@/components/common/DrawerWrapper";
 import { Button } from "@/components/ui/button";
-import { DrawerClose } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useI18n } from "@/contexts/LangContext";
 import { useAllCats, useSubscription } from "@/contexts/SubsContext";
 import { generateSoftColor } from "@/lib/color";
 import { calculateMonthlyCost, calculateYearlyCost } from "@/lib/cost";
-import { ChartPie, X } from "lucide-react";
+import { ChartPie } from "lucide-react";
 import { useMemo, useState } from "react";
 import { ChartComponent } from "./ChartComponent";
 
-//TODO: fix Blocked aria-hidden on an element because its descendant retained focus
 export default function AnalyticsDrawer() {
   const { t } = useI18n();
   const [{ subs }] = useSubscription();
@@ -76,14 +74,6 @@ export default function AnalyticsDrawer() {
         <Button variant="ghost" aria-label={t.analyse.label}>
           <ChartPie style={{ width: "24px", height: "24px" }} />
         </Button>
-      }
-      footer={
-        <DrawerClose asChild>
-          <Button variant="outline">
-            <X size={16} />
-            {t.common.close}
-          </Button>
-        </DrawerClose>
       }
     >
       <ScrollArea className="h-[calc(90vh-120px)] px-4">

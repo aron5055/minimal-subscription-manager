@@ -1,5 +1,7 @@
+import { Button } from "@/components/ui/button";
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
@@ -7,11 +9,12 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { X } from "lucide-react";
 
 interface DrawerWrapperProps {
   children: React.ReactNode;
   trigger: React.ReactNode;
-  footer: React.ReactNode;
+  footer?: React.ReactNode; // 使 footer 可选
   title: string;
   description: string;
   open?: boolean;
@@ -33,13 +36,23 @@ export function DrawerWrapper({
       <DrawerContent className="max-h-[90vh]">
         <div className="mx-auto w-full max-w-6xl">
           <DrawerHeader className="pb-4">
-            <DrawerTitle className="text-center">{title}</DrawerTitle>
+            <div className="flex items-center justify-between">
+              <DrawerTitle className="text-center flex-1">{title}</DrawerTitle>
+              {
+                <DrawerClose asChild>
+                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                    <X size={16} />
+                    <span className="sr-only">Close</span>
+                  </Button>
+                </DrawerClose>
+              }
+            </div>
             <DrawerDescription className="sr-only">
               {description}
             </DrawerDescription>
           </DrawerHeader>
           {children}
-          <DrawerFooter className="pt-2">{footer}</DrawerFooter>
+          {footer && <DrawerFooter className="pt-2">{footer}</DrawerFooter>}
         </div>
       </DrawerContent>
     </Drawer>

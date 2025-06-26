@@ -5,6 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useI18n } from "@/contexts/LangContext";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
@@ -21,6 +22,7 @@ interface DatePickerProps {
 
 export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
   ({ id, value, onChange, onBlur, required = false }, ref) => {
+    const { t } = useI18n();
     const isPicked = Boolean(value);
     const [open, setOpen] = useState(false);
 
@@ -36,6 +38,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
               !isPicked && "text-muted-foreground",
             )}
             onBlur={onBlur}
+            aria-label={`${t.accessibility.btn.datePicker} ${isPicked ? format(value!, "P") : ""}`}
           >
             <CalendarIcon />
             {isPicked ? format(value!, "P") : "Pick a date"}
