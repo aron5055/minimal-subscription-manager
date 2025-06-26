@@ -24,7 +24,7 @@ createRoot(document.getElementById("root")!).render(
             <SortProvider>
               <FilterProvider>
                 <App />
-                <Toaster />
+                <Toaster position="top-center" richColors />
               </FilterProvider>
             </SortProvider>
           </CurrencyProvider>

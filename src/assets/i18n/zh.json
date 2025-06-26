@@ -73,6 +73,8 @@
   "settings": {
     "label": "设置",
     "importData": "导入数据",
+    "importSuccess": "数据导入成功",
+    "importError": "数据导入失败",
     "exportData": "导出数据",
     "defaultCurrency": "默认货币单位",
     "lang": {

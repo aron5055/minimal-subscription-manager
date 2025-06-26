@@ -82,7 +82,7 @@ export const mockSubscriptions: Subscription[] = [
     currencyCode: "USD",
     icon: {
       type: "favicon",
-      url: "chatgpt.com",
+      url: "https://chatgpt.com",
     },
     url: "https://chatgpt.com",
     notes: "GPT-4 访问权限",

@@ -3,13 +3,11 @@ import { useI18n } from "@/contexts/lang";
 import { useSubscription } from "@/contexts/subscription";
 import { exportBlobSchema, type State } from "@/types/types";
 import { Download, Upload } from "lucide-react";
-import { useRef } from "react";
 import { toast } from "sonner";
 
 export function ImportExportMenu() {
   const { t } = useI18n();
   const { state, dispatch } = useSubscription();
-  const fileRef = useRef<HTMLInputElement>(null);
 
   function exportData(state: State): void {
     const blob = new Blob(
@@ -32,42 +30,39 @@ export function ImportExportMenu() {
     URL.revokeObjectURL(href);
   }
 
-  const importData = async () => {
-    const file = fileRef.current?.files?.[0];
-    if (!file) return;
+  const importData = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "application/json";
 
-    try {
-      const text = await file.text();
-      const parsed = exportBlobSchema.parse(JSON.parse(text));
-      dispatch({ type: "HYDRATE_STATE", payload: parsed.data });
-      // TODO: better prompts
-      toast.success("success");
-    } catch (e) {
-      // TODO: better prompts
-      toast.error("error");
-    } finally {
-      fileRef.current!.value = "";
-    }
+    input.onchange = async (event) => {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+
+      try {
+        const text = await file.text();
+        const parsed = exportBlobSchema.parse(JSON.parse(text));
+        dispatch({ type: "HYDRATE_STATE", payload: parsed.data });
+        toast.success(t.settings.importSuccess as string);
+      } catch (error) {
+        toast.error(t.settings.importError as string);
+        console.error("Import error:", error);
+      }
+    };
+
+    input.click();
   };
 
   return (
     <>
-      <DropdownMenuItem onClick={() => fileRef.current?.click()}>
-        <Download />
+      <DropdownMenuItem onClick={importData}>
+        <Upload />
         {t.settings.importData}
       </DropdownMenuItem>
       <DropdownMenuItem onClick={() => exportData(state)}>
-        <Upload />
+        <Download />
         {t.settings.exportData}
       </DropdownMenuItem>
-
-      <input
-        type="file"
-        hidden
-        ref={fileRef}
-        accept="application/json"
-        onChange={importData}
-      />
     </>
   );
 }

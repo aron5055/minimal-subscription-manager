@@ -78,6 +78,8 @@
     "label": "Settings",
     "importData": "Import Data",
     "exportData": "Export Data",
+    "importSuccess": "Data imported successfully",
+    "importError": "Data import failed",
     "defaultCurrency": "Default Currency",
     "lang": {
       "label": "Language",
