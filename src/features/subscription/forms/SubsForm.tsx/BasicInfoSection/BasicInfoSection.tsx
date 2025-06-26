@@ -39,7 +39,7 @@ export function BasicInfoSection({ form, clearIcon }: BasicInfoSectionProps) {
               {...field}
               spellCheck={false}
               onChange={(e) => {
-                form.setValue("title", e.target.value);
+                field.onChange(e.target.value);
                 setIcon(e.target.value);
               }}
             />

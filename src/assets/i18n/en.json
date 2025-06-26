@@ -1,5 +1,5 @@
 {
-  "title": "Minimal Subscription Manager",
+  "title": "Simple Subscription Manager",
   "nosubs": {
     "label": "No Subscriptions",
     "description": "Click the '+' button below to add your first subscription!"
@@ -82,7 +82,7 @@
     "lang": {
       "label": "Language",
       "eng": "English",
-      "cn": "中文"
+      "cn": "简体中文"
     },
     "color": {
       "label": "Theme Color",

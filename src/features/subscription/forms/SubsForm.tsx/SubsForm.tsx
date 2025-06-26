@@ -1,7 +1,6 @@
 import { FormItemWrapper } from "@/components/common/FormItemWrapper";
 import { Form, FormField } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { useCurrency } from "@/contexts/currency";
 import { useI18n } from "@/contexts/lang";
 import makeFormSchema from "@/lib/form";
 import type { Icon, Subscription } from "@/types/types";
@@ -24,9 +23,8 @@ export function SubsForm({
   onSubmit,
   formId = "subscription-form",
 }: SubsFormProps) {
-  const { currency } = useCurrency();
   const { t } = useI18n();
-  const schema = useMemo(() => makeFormSchema(currency, t), [currency, t]);
+  const schema = useMemo(() => makeFormSchema(t), [t]);
   const defaults = useMemo(() => schema.parse(sub ?? {}), [schema, sub]);
   const form = useForm({
     resolver: zodResolver(schema),

@@ -1,12 +1,16 @@
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { type ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 import { CurrencyContext } from "./CurrencyContext";
 
 export function CurrencyProvider({ children }: { children: ReactNode }) {
   const [currency, setCurrency] = useLocalStorage("currency", "USD");
 
+  const value = useMemo(
+    () => ({ currency, setCurrency }),
+    [currency, setCurrency],
+  );
   return (
-    <CurrencyContext.Provider value={{ currency, setCurrency }}>
+    <CurrencyContext.Provider value={value}>
       {children}
     </CurrencyContext.Provider>
   );

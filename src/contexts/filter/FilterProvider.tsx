@@ -1,10 +1,6 @@
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import type { FilterType } from "@/lib/subs";
-import {
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { FilterContext } from "./FilterContext";
 
 export function FilterProvider({ children }: { children: ReactNode }) {
@@ -44,11 +40,17 @@ export function FilterProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const value = useMemo(
+    () => ({
+      filterType,
+      setFilterType,
+      resetFilter,
+      filterNums,
+    }),
+    [filterType, filterNums],
+  );
+
   return (
-    <FilterContext.Provider
-      value={{ filterType, setFilterType, resetFilter, filterNums }}
-    >
-      {children}
-    </FilterContext.Provider>
+    <FilterContext.Provider value={value}>{children}</FilterContext.Provider>
   );
 }

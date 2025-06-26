@@ -1,5 +1,5 @@
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useMemo, type ReactNode } from "react";
 import { ThemeContext } from "./ThemeContext";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -21,16 +21,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.classList.add(theme);
   }, [theme]);
 
+  const value = useMemo(
+    () => ({
+      theme,
+      setTheme,
+      enableBackgroundColor,
+      setEnableBackgroundColor,
+    }),
+    [theme, setTheme, enableBackgroundColor, setEnableBackgroundColor],
+  );
+
   return (
-    <ThemeContext.Provider
-      value={{
-        theme,
-        setTheme,
-        enableBackgroundColor,
-        setEnableBackgroundColor,
-      }}
-    >
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 }

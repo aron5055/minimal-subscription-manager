@@ -1,5 +1,5 @@
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { type ReactNode } from "react";
+import { useEffect, useMemo, type ReactNode } from "react";
 import { z } from "zod/v4";
 import { LangContext, resources, type Lang } from "./LangContext";
 
@@ -14,9 +14,26 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     }
   });
 
-  return (
-    <LangContext.Provider value={{ t: resources[lang], lang, setLang }}>
-      {children}
-    </LangContext.Provider>
+  useEffect(() => {
+    if (lang === "zh") {
+      z.config(z.locales.zhCN());
+      document.documentElement.lang = "zh-CN";
+      document.title = "极简订阅管理器";
+    } else {
+      z.config(z.locales.en());
+      document.documentElement.lang = "en";
+      document.title = "Minimal Subscription Manager";
+    }
+  }, [lang]);
+
+  const value = useMemo(
+    () => ({
+      t: resources[lang],
+      lang,
+      setLang,
+    }),
+    [lang, setLang],
   );
+
+  return <LangContext.Provider value={value}>{children}</LangContext.Provider>;
 }
