@@ -25,7 +25,7 @@
 > [链接](https://minimal-subscription-manager.vercel.app/)
 
 <p align="center">
-  <video src="../assets/demo.mp4" width="600" controls autoplay loop muted></video>
+  <img src="../assets/demo.gif" width="600"/>
 </p>
 
 ## ✨ 功能特性
