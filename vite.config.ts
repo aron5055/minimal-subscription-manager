@@ -3,6 +3,8 @@ import path from "path";
 import { defineConfig } from "vite";
 import viteBundleAnalyzer from "vite-bundle-analyzer";
 
+const BACKEND_URL = "https://subs-backend.yxxyyijiaren.workers.dev";
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), viteBundleAnalyzer()],
@@ -22,6 +24,16 @@ export default defineConfig({
             return "vendor";
           }
         },
+      },
+    },
+  },
+  server: {
+    proxy: {
+      "/api": {
+        target: BACKEND_URL,
+        changeOrigin: true,
+        secure: false,
+        rewrite: (p) => p.replace(/^\/api/, ""),
       },
     },
   },
