@@ -4,6 +4,7 @@ import { I18nProvider } from "@/contexts/lang";
 import { SortProvider } from "@/contexts/sort";
 import { SubsProvider } from "@/contexts/subscription";
 import { ThemeProvider } from "@/contexts/theme";
+import { Analytics } from "@vercel/analytics/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Toaster } from "sonner";
@@ -12,7 +13,7 @@ import "./index.css";
 
 // 在开发模式下加载开发工具
 if (import.meta.env.DEV) {
-  import("./lib/dev");
+  await import("./lib/dev");
 }
 
 createRoot(document.getElementById("root")!).render(
@@ -25,6 +26,7 @@ createRoot(document.getElementById("root")!).render(
               <FilterProvider>
                 <App />
                 <Toaster position="top-center" richColors />
+                <Analytics />
               </FilterProvider>
             </SortProvider>
           </CurrencyProvider>
