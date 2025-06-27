@@ -4,7 +4,30 @@
 
 > Responsive • Drag-and-drop cards • Multi-currency • Multi-language
 
+🌍 **Other Languages:** [简体中文](docs/README.zh-CN.md) • [日本語](docs/README.ja.md)
+
 ---
+
+## 📖 Table of Contents
+- [Simple Subscription Manager](#simple-subscription-manager)
+  - [📖 Table of Contents](#-table-of-contents)
+  - [🌐 Live Demo](#-live-demo)
+  - [✨ Features](#-features)
+  - [🛠️ Tech Stack](#️-tech-stack)
+  - [🚀 Quick Start](#-quick-start)
+  - [📈 Roadmap](#-roadmap)
+  - [🤝 Contributing](#-contributing)
+  - [📄 License](#-license)
+
+---
+
+## 🌐 Live Demo
+> [Link](https://minimal-subscription-manager.vercel.app/)
+
+<p align="center">
+  <video src="assets/demo.mp4" width="600" controls autoplay loop muted></video>
+</p>
+
 
 ## ✨ Features
 - **Responsive design** – works on desktop and mobile.
@@ -18,10 +41,6 @@
 - **Three billing cycles**: daily, monthly, yearly.
 - **Import / export** JSON data for easy backup & migration.
 
-## 🌐 Live Demo
-> _Coming soon_: <https://YOUR-DEPLOYED-URL.com>
-
-<!-- replace with real URL after deploy -->
 
 ## 🛠️ Tech Stack
 | Purpose | Library |
@@ -43,3 +62,18 @@ npm install          # or npm / yarn
 npm dev              # http://localhost:5173
 npm build            # production
 npm preview          # optional preview
+```
+> Requirements Node 18+ and a modern browser.
+
+## 📈 Roadmap
+- User notifications for upcoming renewals
+- Upload Custom Icons
+- Cloud sync (optional)
+- PWA installability
+- More granular permissions & roles
+
+## 🤝 Contributing
+Issues and PRs are welcome! Please open an issue first if you plan a large change.
+
+## 📄 License
+MIT © 2025 Aron (see LICENSE).
