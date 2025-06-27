@@ -45,7 +45,7 @@ export const calculateCost = (
 export const convertCurrency = (
   amount: number,
   currency: string,
-  rates?: Record<string, number>,
+  rates: Record<string, number> | null,
 ): number => {
   if (!rates) return amount;
 
