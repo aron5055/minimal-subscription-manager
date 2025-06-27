@@ -38,7 +38,7 @@ export function DialogWrapper({
       left-1/2 -translate-x-1/2
       top-[5svh] translate-y-0 
       sm:top-1/2 sm:-translate-y-1/2
-      max-h-[90svh] overflow-y-auto flex flex-col
+      max-h-[90svh] flex flex-col
       "
       >
         <DialogHeader className="shrink-0 px-6 pt-6 pb-4">
@@ -48,7 +48,7 @@ export function DialogWrapper({
           </DialogDescription>
         </DialogHeader>
         <Separator />
-        <section className="flex-1 overflow-y-auto flex justify-center px-6">
+        <section className="flex-1 overflow-y-auto flex justify-center px-6 min-h-0">
           {children}
         </section>
         <Separator />
