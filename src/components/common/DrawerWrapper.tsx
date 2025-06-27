@@ -13,7 +13,7 @@ import { X } from "lucide-react";
 
 interface DrawerWrapperProps {
   children: React.ReactNode;
-  trigger: React.ReactNode;
+  trigger?: React.ReactNode;
   footer?: React.ReactNode; // 使 footer 可选
   title: string;
   description: string;
@@ -32,7 +32,7 @@ export function DrawerWrapper({
 }: DrawerWrapperProps) {
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerTrigger asChild>{trigger}</DrawerTrigger>
+      {trigger && <DrawerTrigger asChild>{trigger}</DrawerTrigger>}
       <DrawerContent className="max-h-[90vh]">
         <div className="mx-auto w-full max-w-6xl">
           <DrawerHeader className="pb-4">

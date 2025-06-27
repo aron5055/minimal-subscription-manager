@@ -1,34 +1,34 @@
 import type { Category, State, Subscription } from "@/types/types";
 
-// 模拟分类数据
+// Mock category data
 export const mockCategories: Record<string, Category> = {
   entertainment: {
     id: "entertainment",
-    name: "娱乐",
+    name: "Entertainment",
   },
   productivity: {
     id: "productivity",
-    name: "生产力",
+    name: "Productivity",
   },
   news: {
     id: "news",
-    name: "新闻资讯",
+    name: "News & Media",
   },
   cloud: {
     id: "cloud",
-    name: "云服务",
+    name: "Cloud Services",
   },
   development: {
     id: "development",
-    name: "开发工具",
+    name: "Development Tools",
   },
   health: {
     id: "health",
-    name: "健康健身",
+    name: "Health & Fitness",
   },
 };
 
-// 模拟订阅数据
+// Mock subscription data
 export const mockSubscriptions: Subscription[] = [
   {
     id: "netflix-001",
@@ -37,13 +37,14 @@ export const mockSubscriptions: Subscription[] = [
     currencyCode: "USD",
     icon: { type: "builtin", name: "video" },
     url: "https://netflix.com",
-    notes: "家庭套餐",
+    notes: "Family plan",
     color: "#E50914",
     startDate: "2025-01-01",
     endDate: null,
     cycle: { num: 1, type: "month(s)" },
     categoryId: "entertainment",
     status: "active",
+    autoRenew: true,
   },
   {
     id: "spotify-002",
@@ -52,13 +53,14 @@ export const mockSubscriptions: Subscription[] = [
     currencyCode: "USD",
     icon: { type: "builtin", name: "music" },
     url: "https://spotify.com",
-    notes: "个人版",
+    notes: "Personal plan",
     color: "#1DB954",
     startDate: "2025-01-15",
     endDate: null,
     cycle: { num: 1, type: "month(s)" },
     categoryId: "entertainment",
     status: "active",
+    autoRenew: true,
   },
   {
     id: "notion-003",
@@ -67,13 +69,14 @@ export const mockSubscriptions: Subscription[] = [
     currencyCode: "USD",
     icon: { type: "builtin", name: "productivity" },
     url: "https://notion.so",
-    notes: "个人专业版",
+    notes: "Personal Pro version",
     color: "#000000",
     startDate: "2025-02-01",
     endDate: null,
     cycle: { num: 1, type: "month(s)" },
     categoryId: "productivity",
     status: "active",
+    autoRenew: true,
   },
   {
     id: "chatgpt-004",
@@ -85,13 +88,14 @@ export const mockSubscriptions: Subscription[] = [
       url: "https://chatgpt.com",
     },
     url: "https://chatgpt.com",
-    notes: "GPT-4 访问权限",
+    notes: "GPT-4 access",
     color: "#10A37F",
     startDate: "2025-01-10",
     endDate: null,
     cycle: { num: 1, type: "month(s)" },
     categoryId: "productivity",
     status: "active",
+    autoRenew: true,
   },
   {
     id: "github-005",
@@ -100,13 +104,14 @@ export const mockSubscriptions: Subscription[] = [
     currencyCode: "USD",
     icon: { type: "builtin", name: "development" },
     url: "https://github.com",
-    notes: "代码仓库托管",
+    notes: "Code repository hosting",
     color: "#24292E",
     startDate: "2025-01-01",
     endDate: null,
     cycle: { num: 1, type: "month(s)" },
     categoryId: "development",
     status: "active",
+    autoRenew: true,
   },
   {
     id: "icloud-006",
@@ -115,13 +120,14 @@ export const mockSubscriptions: Subscription[] = [
     currencyCode: "USD",
     icon: { type: "builtin", name: "cloud" },
     url: "https://icloud.com",
-    notes: "200GB 存储空间",
+    notes: "200GB storage",
     color: "#007AFF",
     startDate: "2025-01-05",
     endDate: null,
     cycle: { num: 1, type: "month(s)" },
     categoryId: "cloud",
     status: "active",
+    autoRenew: true,
   },
   {
     id: "nytimes-007",
@@ -130,13 +136,14 @@ export const mockSubscriptions: Subscription[] = [
     currencyCode: "USD",
     icon: { type: "builtin", name: "news" },
     url: "https://nytimes.com",
-    notes: "数字版订阅",
+    notes: "Digital subscription",
     color: "#000000",
     startDate: "2025-02-15",
     endDate: null,
     cycle: { num: 1, type: "month(s)" },
     categoryId: "news",
     status: "active",
+    autoRenew: true,
   },
   {
     id: "fitness-009",
@@ -145,13 +152,14 @@ export const mockSubscriptions: Subscription[] = [
     currencyCode: "USD",
     icon: { type: "builtin", name: "health" },
     url: "https://nike.com",
-    notes: "高级健身计划",
+    notes: "Premium fitness plan",
     color: "#FF6900",
     startDate: "2025-01-01",
     endDate: "2025-12-31",
     cycle: { num: 1, type: "month(s)" },
     categoryId: "health",
     status: "active",
+    autoRenew: true,
   },
   {
     id: "steam-010",
@@ -160,13 +168,14 @@ export const mockSubscriptions: Subscription[] = [
     currencyCode: "USD",
     icon: { type: "builtin", name: "gaming" },
     url: "https://store.steampowered.com",
-    notes: "年度游戏通行证",
+    notes: "Annual game pass",
     color: "#1B2838",
     startDate: "2025-01-01",
     endDate: null,
     cycle: { num: 1, type: "year(s)" },
     categoryId: "entertainment",
     status: "active",
+    autoRenew: true,
   },
   {
     id: "dropbox-011",
@@ -175,13 +184,14 @@ export const mockSubscriptions: Subscription[] = [
     currencyCode: "USD",
     icon: { type: "builtin", name: "cloud" },
     url: "https://dropbox.com",
-    notes: "2TB 云存储",
+    notes: "2TB cloud storage",
     color: "#0061FF",
     startDate: "2025-02-01",
     endDate: null,
     cycle: { num: 1, type: "month(s)" },
     categoryId: "cloud",
     status: "paused",
+    autoRenew: true,
   },
   {
     id: "figma-012",
@@ -190,17 +200,18 @@ export const mockSubscriptions: Subscription[] = [
     currencyCode: "USD",
     icon: { type: "builtin", name: "development" },
     url: "https://figma.com",
-    notes: "设计协作工具",
+    notes: "Design collaboration tool",
     color: "#F24E1E",
     startDate: "2025-01-15",
     endDate: null,
     cycle: { num: 1, type: "month(s)" },
     categoryId: "development",
     status: "active",
+    autoRenew: true,
   },
 ];
 
-// 完整的模拟状态
+// Complete mock state
 export const mockState: State = {
   subs: mockSubscriptions,
   cats: mockCategories,

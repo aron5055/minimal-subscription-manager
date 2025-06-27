@@ -1,52 +1,66 @@
 import { useSubscription } from "@/contexts/subscription";
-import { isSubscriptionExpired } from "@/lib/date";
+import { getNextRenewalDate, isSubscriptionExpired } from "@/lib/date";
 import type { Subscription } from "@/types/types";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 /**
- * Hook to automatically pause expired subscriptions
+ * Hook to automatically handle expired subscriptions
  * Checks for expired subscriptions on mount and sets up periodic checks
+ * - For auto-renewing subscriptions: updates start date to next billing cycle
+ * - For non-auto-renewing subscriptions: pauses them
  */
 export function useExpiredSubscriptions() {
   const { state, dispatch } = useSubscription();
 
-  const checkAndPauseExpiredSubscriptions = () => {
+  const checkAndHandleExpiredSubscriptions = useCallback(() => {
     // Find all active subscriptions that have expired
     const expiredSubs = state.subs.filter((sub: Subscription) => {
       return sub.status === "active" && isSubscriptionExpired(sub);
     });
 
-    // Pause each expired subscription
+    // Handle each expired subscription
     expiredSubs.forEach((sub) => {
-      dispatch({
-        type: "UPDATE_SUB",
-        payload: {
-          ...sub,
-          status: "paused",
-        },
-      });
+      if (sub.autoRenew) {
+        // For auto-renewing subscriptions, update the start date to the next billing cycle
+        const nextStartDate = getNextRenewalDate(sub);
+        dispatch({
+          type: "UPDATE_SUB",
+          payload: {
+            ...sub,
+            startDate: nextStartDate,
+          },
+        });
+      } else {
+        dispatch({
+          type: "UPDATE_SUB",
+          payload: {
+            ...sub,
+            status: "paused",
+          },
+        });
+      }
     });
 
     return expiredSubs.length;
-  };
+  }, [state.subs, dispatch]);
 
   useEffect(() => {
     // Check immediately when the hook is mounted
-    const pausedCount = checkAndPauseExpiredSubscriptions();
+    const handledCount = checkAndHandleExpiredSubscriptions();
 
-    if (pausedCount > 0) {
+    if (handledCount > 0) {
       console.log(
-        `Automatically paused ${pausedCount} expired subscription(s)`,
+        `Automatically handled ${handledCount} expired subscription(s)`,
       );
     }
 
     // Set up periodic checks (every hour)
     const interval = setInterval(
       () => {
-        const pausedCount = checkAndPauseExpiredSubscriptions();
-        if (pausedCount > 0) {
+        const handledCount = checkAndHandleExpiredSubscriptions();
+        if (handledCount > 0) {
           console.log(
-            `Automatically paused ${pausedCount} expired subscription(s)`,
+            `Automatically handled ${handledCount} expired subscription(s)`,
           );
         }
       },
@@ -54,7 +68,7 @@ export function useExpiredSubscriptions() {
     ); // Check every hour
 
     return () => clearInterval(interval);
-  }, [state.subs, dispatch]);
+  }, [checkAndHandleExpiredSubscriptions]);
 
-  return { checkAndPauseExpiredSubscriptions };
+  return { checkAndHandleExpiredSubscriptions };
 }

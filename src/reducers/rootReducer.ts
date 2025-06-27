@@ -1,5 +1,4 @@
 import type { Category, State, Subscription } from "@/types/types";
-import { omit } from "lodash-es";
 
 export type Action =
   | { type: "ADD_SUB"; payload: Subscription }
@@ -69,7 +68,9 @@ function catReducer(cats: Record<string, Category>, a: Action) {
       return { ...cats, [a.id]: { ...cats[a.id], name: a.name } };
     }
     case "DELETE_CAT": {
-      return omit(cats, a.id);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { [a.id]: _, ...remaining } = cats;
+      return remaining;
     }
     case "RESET_CAT": {
       return {};

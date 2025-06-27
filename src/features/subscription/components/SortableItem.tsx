@@ -1,3 +1,4 @@
+import { cn } from "@/lib";
 import type { Subscription } from "@/types/types";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -7,9 +8,14 @@ import { SubscriptionCard } from "./SubscriptionCard";
 interface SortableItemProps {
   sub: Subscription;
   disabled?: boolean;
+  isDragging: boolean;
 }
 
-export function SortableItem({ sub, disabled = false }: SortableItemProps) {
+export function SortableItem({
+  sub,
+  disabled = false,
+  isDragging,
+}: SortableItemProps) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: sub.id, disabled });
 
@@ -23,7 +29,7 @@ export function SortableItem({ sub, disabled = false }: SortableItemProps) {
       ref={setNodeRef}
       style={style}
       {...attributes}
-      className="relative group"
+      className={cn("relative group", isDragging ? "opacity-0" : "")}
     >
       <SubscriptionCard sub={sub} />
       {!disabled && (

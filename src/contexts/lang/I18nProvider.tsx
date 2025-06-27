@@ -1,29 +1,13 @@
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { configureLanguage, detectLanguage, type Lang } from "@/lib/i18n";
 import { useEffect, useMemo, type ReactNode } from "react";
-import { z } from "zod/v4";
-import { LangContext, resources, type Lang } from "./LangContext";
+import { LangContext, resources } from "./LangContext";
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useLocalStorage<Lang>("i18n", () => {
-    if (navigator.language.startsWith("zh")) {
-      z.config(z.locales.zhCN());
-      return "zh";
-    } else {
-      z.config(z.locales.en());
-      return "en";
-    }
-  });
+  const [lang, setLang] = useLocalStorage<Lang>("i18n", detectLanguage);
 
   useEffect(() => {
-    if (lang === "zh") {
-      z.config(z.locales.zhCN());
-      document.documentElement.lang = "zh-CN";
-      document.title = "极简订阅管理器";
-    } else {
-      z.config(z.locales.en());
-      document.documentElement.lang = "en";
-      document.title = "Minimal Subscription Manager";
-    }
+    configureLanguage(lang);
   }, [lang]);
 
   const value = useMemo(

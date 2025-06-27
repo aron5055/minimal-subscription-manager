@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/popover";
 import { useI18n } from "@/contexts/lang";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { forwardRef, useState } from "react";
 
@@ -18,10 +17,14 @@ interface DatePickerProps {
   onBlur: () => void;
   required?: boolean;
   name?: string;
+  disabled?: boolean;
 }
 
 export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
-  ({ id, value, onChange, onBlur, required = false }, ref) => {
+  (
+    { id, value, onChange, onBlur, required = false, disabled = false },
+    ref,
+  ) => {
     const { t } = useI18n();
     const isPicked = Boolean(value);
     const [open, setOpen] = useState(false);
@@ -38,10 +41,11 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
               !isPicked && "text-muted-foreground",
             )}
             onBlur={onBlur}
-            aria-label={`${t.accessibility.btn.datePicker} ${isPicked ? format(value!, "P") : ""}`}
+            aria-label={`${t.accessibility.btn.datePicker} ${isPicked ? value!.toLocaleDateString("en-CA") : ""}`}
+            disabled={disabled}
           >
             <CalendarIcon />
-            {isPicked ? format(value!, "P") : "Pick a date"}
+            {isPicked ? value!.toLocaleDateString("en-CA") : "Pick a date"}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto" align="start">
@@ -55,6 +59,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
             captionLayout="dropdown"
             required={required}
             initialFocus
+            disabled={disabled}
           />
         </PopoverContent>
       </Popover>

@@ -5,7 +5,7 @@ import { renderIcon } from "@/lib/icon";
 import type { Subscription } from "@/types/types";
 import getSymbolFromCurrency from "currency-symbol-map";
 
-export function SubscriptionInfo({ sub }: { sub: Subscription }) {
+export function SubsInfoCard({ sub }: { sub: Subscription }) {
   const { t } = useI18n();
   const isExpired = isSubscriptionExpired(sub);
   const daysRemaining = daysLeft(sub);

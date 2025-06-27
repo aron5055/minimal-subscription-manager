@@ -35,21 +35,27 @@ export function ImportExportMenu() {
     input.type = "file";
     input.accept = "application/json";
 
-    input.onchange = async (event) => {
+    const handleFileChange = (event: Event) => {
       const file = (event.target as HTMLInputElement).files?.[0];
       if (!file) return;
 
-      try {
-        const text = await file.text();
-        const parsed = exportBlobSchema.parse(JSON.parse(text));
-        dispatch({ type: "HYDRATE_STATE", payload: parsed.data });
-        toast.success(t.settings.importSuccess as string);
-      } catch (error) {
-        toast.error(t.settings.importError as string);
-        console.error("Import error:", error);
-      }
+      void (async () => {
+        try {
+          const text = await file.text();
+          const parsed = exportBlobSchema.parse(JSON.parse(text));
+          dispatch({ type: "HYDRATE_STATE", payload: parsed.data });
+          toast.success(t.settings.importSuccess);
+        } catch (error) {
+          toast.error(t.settings.importError);
+          console.error("Import error:", error);
+        } finally {
+          input.removeEventListener("change", handleFileChange);
+          input.remove();
+        }
+      })();
     };
 
+    input.addEventListener("change", handleFileChange);
     input.click();
   };
 

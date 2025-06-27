@@ -1,0 +1,158 @@
+{
+  "title": "シンプルサブスクリプション管理",
+  "nosubs": {
+    "label": "サブスクリプションがありません",
+    "description": "下の「+」ボタンをクリックして最初のサブスクリプションを追加しましょう！"
+  },
+  "subscription": {
+    "add": "サブスクリプション追加",
+    "edit": "サブスクリプション編集",
+    "description": "サブスクリプションの詳細を入力してください",
+    "form": {
+      "title": "名前",
+      "url": {
+        "label": "URL",
+        "placeholder": "右のチェックボックスをオンにしてアイコンを取得"
+      },
+      "icon": {
+        "label": "アイコン",
+        "description": "アイコンを選択",
+        "clear": "アイコンをクリア"
+      },
+      "currency": "通貨を検索",
+      "notes": "メモ",
+      "date": {
+        "start": "サブスクリプション開始日",
+        "end": "サブスクリプション終了日",
+        "disabledNote": "自動更新をオフにして終了日を設定"
+      },
+      "cycle": {
+        "label": "請求サイクル",
+        "type": [
+          { "label": "日", "value": "day(s)" },
+          { "label": "月", "value": "month(s)" },
+          { "label": "年", "value": "year(s)" }
+        ],
+        "map": {
+          "day(s)": "日",
+          "month(s)": "月",
+          "year(s)": "年"
+        }
+      },
+      "autoRenew": "自動更新",
+      "price": "料金",
+      "color": {
+        "label": "背景色",
+        "input": "色を入力（hex）"
+      },
+      "category": {
+        "label": "カテゴリを選択",
+        "description": "既存のカテゴリを選択するか、新しいカテゴリを作成",
+        "manage": "カテゴリ管理",
+        "add": "カテゴリ追加",
+        "edit": "カテゴリ編集",
+        "delete": "カテゴリ削除",
+        "deleteConfirm": "このカテゴリを削除してもよろしいですか？このカテゴリのサブスクリプションはデフォルトカテゴリに移動されます。",
+        "name": "カテゴリ名",
+        "create": "作成",
+        "save": "保存",
+        "cancel": "キャンセル",
+        "clear": "カテゴリをクリア"
+      },
+      "preset": {
+        "label": "プリセット設定",
+        "description": "プリセット設定を選択"
+      },
+      "submit": "保存"
+    },
+    "submit": {
+      "add": "正常に追加されました!",
+      "edit": "編集内容を保存しました。"
+    }
+  },
+  "card": {
+    "title": "サブスクリプション詳細",
+    "description": "サブスクリプションの表示または編集",
+    "expired": "期限切れ",
+    "daysLeft": "日残り",
+    "delete": {
+      "label": "サブスクリプション削除",
+      "description": "このサブスクリプションを削除してもよろしいですか？"
+    }
+  },
+  "settings": {
+    "label": "設定",
+    "importData": "データをインポート",
+    "exportData": "データをエクスポート",
+    "importSuccess": "データが正常にインポートされました",
+    "importError": "データのインポートに失敗しました",
+    "defaultCurrency": "デフォルト通貨",
+    "lang": {
+      "label": "言語",
+      "eng": "English",
+      "cn": "简体中文",
+      "jp": "日本語"
+    },
+    "color": {
+      "label": "テーマカラー",
+      "light": "ライトモード",
+      "dark": "ダークモード",
+      "background": "背景色を表示"
+    },
+    "reset": {
+      "label": "全データをリセット",
+      "description": "全てのサブスクリプションデータが永続的に失われ、復元できません！"
+    }
+  },
+  "common": {
+    "close": "閉じる",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "reset": "リセット"
+  },
+  "analyse": {
+    "label": "データ分析",
+    "description": "月別・年別の支出統計を提供",
+    "monthly": "月別統計",
+    "yearly": "年別統計",
+    "tabs": {
+      "monthly": "月別統計",
+      "yearly": "年別統計"
+    },
+    "noData": "データがありません",
+    "totalSpent": "総支出",
+    "uncategorized": "未分類"
+  },
+  "sort": {
+    "label": "並び替え",
+    "by": {
+      "title": "名前順",
+      "date": "日付順",
+      "priceMax": "価格順（高い順）",
+      "priceMin": "価格順（安い順）",
+      "category": "カテゴリ順"
+    }
+  },
+  "filter": {
+    "label": "フィルター",
+    "by": {
+      "status": "ステータス別",
+      "active": "アクティブなサブスクリプションを表示",
+      "paused": "一時停止中のサブスクリプションを表示",
+      "category": "カテゴリでフィルター",
+      "date": "サブスクリプションタイプ",
+      "month": "月額サブスクリプション",
+      "year": "年額サブスクリプション",
+      "day": "日額サブスクリプション"
+    }
+  },
+  "error": {
+    "endAfter": "終了日は開始日より後である必要があります（または空白）"
+  },
+  "accessibility": {
+    "btn": {
+      "sortFilter": "並び替えとフィルターメニューを開く",
+      "datePicker": "現在の日付："
+    }
+  }
+}

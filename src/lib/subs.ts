@@ -62,13 +62,22 @@ export function filterSubs(subs: Subscription[], filters: FilterType) {
       statusFilters.push("paused");
     }
 
+    const typeFilters: string[] = [];
+    if (filters.month) {
+      typeFilters.push("month(s)");
+    }
+    if (filters.year) {
+      typeFilters.push("year(s)");
+    }
+    if (filters.day) {
+      typeFilters.push("day(s)");
+    }
+
     const conditions = [
       statusFilters.length === 0 || statusFilters.includes(sub.status),
       filters.category.length === 0 ||
         filters.category.includes(sub.categoryId),
-      !filters.month || sub.cycle.type === "month(s)",
-      !filters.year || sub.cycle.type === "year(s)",
-      !filters.day || sub.cycle.type === "day(s)",
+      typeFilters.length === 0 || typeFilters.includes(sub.cycle.type),
     ];
     return conditions.every(Boolean);
   });

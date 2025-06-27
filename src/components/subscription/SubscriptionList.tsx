@@ -117,6 +117,7 @@ export function SubscriptionList() {
                   key={sub.id}
                   sub={sub}
                   disabled={isDragDisabled}
+                  isDragging={activeId === sub.id}
                 />
               ))
             ) : (

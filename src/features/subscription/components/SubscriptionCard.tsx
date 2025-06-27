@@ -14,9 +14,10 @@ import SubsDialog from "@/features/subscription/SubsDialog";
 import { getTextColorForBackground } from "@/lib/color";
 import { cn } from "@/lib/ui";
 import type { Subscription } from "@/types/types";
-import { Folder, Pause, Pencil, Play } from "lucide-react";
+import { Pause, Pencil, Play } from "lucide-react";
 import { DeleteDialog } from "./DeleteDialog";
-import { SubscriptionInfo } from "./SubscriptionInfo";
+import { SubscriptionContent } from "./SubscriptionContent";
+import { SubsInfoCard } from "./SubsInfoCard";
 
 interface SubCardProps {
   sub: Subscription;
@@ -37,17 +38,15 @@ export function SubscriptionCard({ sub }: SubCardProps) {
   const getCardStyles = () => {
     const backgroundColor = enableBackgroundColor ? sub.color : undefined;
     let opacity = "opacity-100";
-    let brightness = "";
 
     if (isInactive) {
-      brightness = "brightness-50";
-      opacity = "opacity-70";
+      opacity = "opacity-50";
     }
 
-    return { backgroundColor, opacity, brightness };
+    return { backgroundColor, opacity };
   };
 
-  const { backgroundColor, opacity, brightness } = getCardStyles();
+  const { backgroundColor, opacity } = getCardStyles();
 
   const card = (
     <button
@@ -60,14 +59,13 @@ export function SubscriptionCard({ sub }: SubCardProps) {
         "active:scale-[0.98] active:transition-transform active:duration-100",
         textColor,
         opacity,
-        brightness,
       )}
       type="button"
       style={{
         backgroundColor,
       }}
     >
-      <SubscriptionInfo sub={sub} />
+      <SubsInfoCard sub={sub} />
     </button>
   );
 
@@ -81,7 +79,7 @@ export function SubscriptionCard({ sub }: SubCardProps) {
         </SheetHeader>
 
         <div className="space-y-6">
-          <SubscriptionInfo sub={sub} />
+          <SubsInfoCard sub={sub} />
 
           <div className="flex justify-center gap-2 p-4 bg-muted/30 rounded-lg">
             <SubsDialog
@@ -117,34 +115,7 @@ export function SubscriptionCard({ sub }: SubCardProps) {
             <DeleteDialog subId={sub.id} title={sub.title} />
           </div>
 
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 p-3 bg-muted/20 rounded-md">
-              <Folder size={16} className="text-muted-foreground" />
-              <span className="text-sm font-medium">
-                {state.cats[sub.categoryId]?.name ?? t.analyse.uncategorized}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-3 p-3 bg-muted/20 rounded-md">
-              <span className="text-sm text-muted-foreground">
-                {t.subscription.form.cycle.label}:
-              </span>
-              <span className="text-sm font-medium">
-                {`${sub.cycle.num} ${t.subscription.form.cycle.map[sub.cycle.type]}`}
-              </span>
-            </div>
-
-            {sub.notes && (
-              <div className="p-4 bg-muted/20 rounded-md space-y-2">
-                <div className="text-sm font-medium text-muted-foreground">
-                  {t.subscription.form.notes}
-                </div>
-                <div className="text-sm whitespace-pre-wrap leading-relaxed">
-                  {sub.notes}
-                </div>
-              </div>
-            )}
-          </div>
+          <SubscriptionContent cats={state.cats} sub={sub} />
         </div>
       </SheetContent>
     </Sheet>

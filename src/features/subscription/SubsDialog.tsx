@@ -4,6 +4,7 @@ import { useI18n } from "@/contexts/lang";
 import { useSubscription } from "@/contexts/subscription";
 import { type Subscription } from "@/types/types";
 import { useState, type ReactElement } from "react";
+import { toast } from "sonner";
 import { SubsForm } from "./forms/SubsForm.tsx/SubsForm";
 
 interface SubsDialogProps {
@@ -35,6 +36,9 @@ export default function SubsDialog({
       dispatch({ type: "UPDATE_SUB", payload: values });
     }
     setOpen(false);
+    toast.success(
+      mode === "add" ? t.subscription.submit.add : t.subscription.submit.edit,
+    );
   };
 
   return (

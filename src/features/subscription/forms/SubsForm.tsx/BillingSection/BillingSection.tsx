@@ -5,9 +5,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Switch } from "@/components/ui/switch";
 import { useI18n } from "@/contexts/lang";
 import type { Subscription } from "@/types/types";
-import { parseISO } from "date-fns";
 import type { UseFormReturn } from "react-hook-form";
 import { BillingCycleField } from "./BillingCycleField";
 import { DatePicker } from "./DatePicker";
@@ -48,7 +48,7 @@ export function BillingSection({ form }: BillingSectionProps) {
                 <FormControl>
                   <DatePicker
                     {...field}
-                    value={field.value ? parseISO(field.value) : null}
+                    value={field.value ? new Date(field.value) : null}
                     onChange={(d) =>
                       field.onChange(d ? d.toLocaleDateString("en-CA") : null)
                     }
@@ -71,14 +71,42 @@ export function BillingSection({ form }: BillingSectionProps) {
                 <FormControl>
                   <DatePicker
                     {...field}
-                    value={field.value ? parseISO(field.value) : null}
+                    value={field.value ? new Date(field.value) : null}
                     onChange={(d) =>
                       field.onChange(d ? d.toLocaleDateString("en-CA") : null)
                     }
+                    disabled={form.getValues("autoRenew")}
                   />
                 </FormControl>
               </div>
               <FormMessage />
+              {form.getValues("autoRenew") && (
+                <p className="text-[0.8rem] text-muted-foreground mt-1">
+                  {t.subscription.form.date.disabledNote}
+                </p>
+              )}
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="autoRenew"
+          render={({ field }) => (
+            <FormItem>
+              <div className="flex items-center justify-between pr-2">
+                <FormLabel>{t.subscription.form.autoRenew}</FormLabel>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    name={field.name}
+                    onBlur={field.onBlur}
+                    disabled={field.disabled}
+                    ref={field.ref}
+                  />
+                </FormControl>
+              </div>
             </FormItem>
           )}
         />

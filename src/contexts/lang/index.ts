@@ -1,9 +1,9 @@
+export { type Lang } from "@/lib/i18n";
+export { I18nProvider } from "./I18nProvider";
 export {
   LangContext,
-  type Lang,
-  type Translation,
-  type LangContextValue,
   resources,
+  type LangContextValue,
+  type Translation,
 } from "./LangContext";
-export { I18nProvider } from "./I18nProvider";
 export { useI18n } from "./useI18n";

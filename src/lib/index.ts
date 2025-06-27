@@ -3,6 +3,7 @@ export * from "./cost";
 export * from "./date";
 export * from "./dev";
 export * from "./form";
+export * from "./i18n";
 export * from "./icon";
 export * from "./ui";
 export * from "./url";

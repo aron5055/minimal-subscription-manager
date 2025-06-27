@@ -4,7 +4,7 @@ import { getTextColorForBackground } from "@/lib/color";
 import { cn } from "@/lib/ui";
 import type { UniqueIdentifier } from "@dnd-kit/core";
 import { forwardRef } from "react";
-import { SubscriptionInfo } from "./SubscriptionInfo";
+import { SubsInfoCard } from "./SubsInfoCard";
 
 interface CardItemProps {
   id: UniqueIdentifier;
@@ -37,7 +37,7 @@ export const CardItem = forwardRef<HTMLDivElement, CardItemProps>(
           backgroundColor: enableBackgroundColor ? sub.color : undefined,
         }}
       >
-        <SubscriptionInfo sub={sub} />
+        <SubsInfoCard sub={sub} />
       </div>
     );
   },

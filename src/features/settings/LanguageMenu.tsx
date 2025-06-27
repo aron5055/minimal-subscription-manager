@@ -6,7 +6,18 @@ import {
   DropdownMenuSubTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useI18n } from "@/contexts/lang";
+import { type Lang } from "@/lib/i18n";
 import { Check, Globe } from "lucide-react";
+
+// Language key mapping for translations
+const LANGUAGE_KEY_MAP: Record<Lang, keyof typeof import("@/assets/i18n/en.json")["settings"]["lang"]> = {
+  en: "eng",
+  zh: "cn", 
+  jp: "jp"
+};
+
+// Available languages for the application
+const AVAILABLE_LANGUAGES: Lang[] = ["en", "zh", "jp"];
 
 export function LanguageMenu() {
   const { t, lang, setLang } = useI18n();
@@ -19,20 +30,21 @@ export function LanguageMenu() {
       </DropdownMenuSubTrigger>
       <DropdownMenuPortal>
         <DropdownMenuSubContent>
-          <DropdownMenuItem
-            onClick={() => setLang("zh")}
-            className="flex items-center justify-between"
-          >
-            <span>{t.settings.lang.cn}</span>
-            {lang === "zh" && <Check size={16} />}
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => setLang("en")}
-            className="flex items-center justify-between"
-          >
-            <span>{t.settings.lang.eng}</span>
-            {lang === "en" && <Check size={16} />}
-          </DropdownMenuItem>
+          {AVAILABLE_LANGUAGES.map((availableLang) => {
+            const langKey = LANGUAGE_KEY_MAP[availableLang];
+            return (
+              <DropdownMenuItem
+                key={availableLang}
+                onClick={() => setLang(availableLang)}
+                className="flex items-center justify-between"
+              >
+                <span>
+                  {t.settings.lang[langKey]}
+                </span>
+                {lang === availableLang && <Check size={16} />}
+              </DropdownMenuItem>
+            );
+          })}
         </DropdownMenuSubContent>
       </DropdownMenuPortal>
     </DropdownMenuSub>

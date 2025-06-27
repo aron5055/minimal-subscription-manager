@@ -261,7 +261,7 @@
     "currencyCode": "CNY",
     "icon": { "type": "favicon", "url": "https://www.bilibili.com" },
     "url": "https://www.bilibili.com",
-    "notes": "Bilibili Premium Membership",
+    "notes": "",
     "color": "#00A1D6",
     "startDate": null,
     "endDate": null,

@@ -23,7 +23,8 @@
       "notes": "Notes",
       "date": {
         "start": "Subscription Start Date",
-        "end": "Subscription End Date"
+        "end": "Subscription End Date",
+        "disabledNote": "Disable auto-renew to set end date"
       },
       "cycle": {
         "label": "Billing Cycle",
@@ -38,6 +39,7 @@
           "year(s)": "years(s)"
         }
       },
+      "autoRenew": "Auto Renew",
       "price": "Cost",
       "color": {
         "label": "Background Color",
@@ -62,6 +64,10 @@
         "description": "Select preset configuration"
       },
       "submit": "Save"
+    },
+    "submit": {
+      "add": "Added successfully!",
+      "edit": "Saved edits."
     }
   },
   "card": {
@@ -84,7 +90,8 @@
     "lang": {
       "label": "Language",
       "eng": "English",
-      "cn": "简体中文"
+      "cn": "简体中文",
+      "jp": "日本語"
     },
     "color": {
       "label": "Theme Color",

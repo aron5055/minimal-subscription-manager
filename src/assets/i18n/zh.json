@@ -23,7 +23,8 @@
       "notes": "备注",
       "date": {
         "start": "订阅开始日期",
-        "end": "订阅结束日期"
+        "end": "订阅结束日期",
+        "disabledNote": "关闭自动续订来设置结束日期"
       },
       "category": {
         "label": "选择分类",
@@ -39,6 +40,7 @@
         "cancel": "取消",
         "clear": "清除分类"
       },
+      "autoRenew": "自动续订",
       "cycle": {
         "label": "订阅周期",
         "type": [
@@ -58,6 +60,10 @@
         "description": "选择预设配置"
       },
       "submit": "保存"
+    },
+    "submit": {
+      "add": "添加成功！",
+      "edit": "已保存编辑。"
     }
   },
   "card": {
@@ -80,7 +86,8 @@
     "lang": {
       "label": "语言",
       "eng": "English",
-      "cn": "中文"
+      "cn": "中文",
+      "jp": "日本語"
     },
     "color": {
       "label": "主题颜色",

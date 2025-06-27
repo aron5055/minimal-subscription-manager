@@ -1,3 +1,4 @@
+import { today } from "@/lib";
 import { generateSoftColor } from "@/lib/color";
 import { GenericIcons } from "@/lib/icon";
 import { nanoid } from "nanoid";
@@ -44,10 +45,11 @@ export const subSchema = z.object({
   url: z.url().optional().or(z.literal("")).default(""),
   notes: z.string().default(""),
   color: z.string().default(generateSoftColor),
-  startDate: z.iso.date().default(() => new Date().toLocaleDateString("en-CA")),
+  startDate: z.iso.date().default(today),
   endDate: z.iso.date().nullable().default(null),
   cycle: cycleSchema.default({ num: 1, type: "month(s)" }),
   categoryId: z.string().default(""),
+  autoRenew: z.boolean().default(true),
   status: z.enum(["active", "paused"]).default("active"),
 });
 
@@ -67,3 +69,9 @@ export const exportBlobSchema = z.object({
 });
 
 export type ExportBlob = z.infer<typeof exportBlobSchema>;
+
+export interface ExchangeRateData {
+  date: string;
+  base: string;
+  rates: Record<string, number>;
+}

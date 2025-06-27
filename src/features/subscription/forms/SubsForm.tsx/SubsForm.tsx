@@ -44,6 +44,7 @@ export function SubsForm({
     <Form {...form}>
       <form
         id={formId}
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6 w-full max-w-md mx-auto md:w-[90%]"
       >

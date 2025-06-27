@@ -17,9 +17,10 @@ interface ChartData {
 interface ChartProps {
   data: ChartData[];
   title: string;
+  currency: string;
 }
 
-export function ChartComponent({ data, title }: ChartProps) {
+export function ChartComponent({ data, title, currency }: ChartProps) {
   const { t } = useI18n();
 
   if (!data.length) {
@@ -37,7 +38,7 @@ export function ChartComponent({ data, title }: ChartProps) {
       <h4 className="text-sm font-medium text-center mb-4">{title}</h4>
       <div className="h-96 md:h-96">
         <p className="text-center text-sm text-muted-foreground font-medium">
-          {t.analyse.totalSpent}: {total.toFixed(2)}
+          {t.analyse.totalSpent}: {total.toFixed(2)} {currency}
         </p>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
