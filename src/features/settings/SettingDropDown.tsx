@@ -9,6 +9,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useI18n } from "@/contexts/lang";
 import { Settings } from "lucide-react";
+import { FiGithub } from "react-icons/fi";
 import { CurrencyMenu } from "./CurrencyMenu";
 import { ImportExportMenu } from "./ImportExportMenu";
 import { LanguageMenu } from "./LanguageMenu";
@@ -44,6 +45,15 @@ export default function SettingDropDown() {
         <ThemeMenu />
 
         <Separator />
+        <DropdownMenuItem
+          onClick={() => {
+            location.href =
+              "https://github.com/aron5055/simple-subscription-manager";
+          }}
+        >
+          <FiGithub />
+          Github
+        </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <ResetMenu />
         </DropdownMenuItem>
