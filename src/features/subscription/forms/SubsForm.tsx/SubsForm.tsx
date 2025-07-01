@@ -11,6 +11,7 @@ import { BasicInfoSection } from "./BasicInfoSection/BasicInfoSection";
 import { BillingSection } from "./BillingSection/BillingSection";
 import { IconPriceSection } from "./IconPriceSection/IconPriceSection";
 import { StyleSection } from "./StyleSection/StyleSection";
+import { useCurrency } from "@/contexts/currency";
 
 interface SubsFormProps {
   sub?: Subscription;
@@ -24,7 +25,8 @@ export function SubsForm({
   formId = "subscription-form",
 }: SubsFormProps) {
   const { t } = useI18n();
-  const schema = useMemo(() => makeFormSchema(t), [t]);
+  const {currency} = useCurrency();
+  const schema = useMemo(() => makeFormSchema(t, currency), [t, currency]);
   const defaults = useMemo(() => schema.parse(sub ?? {}), [schema, sub]);
   const form = useForm({
     resolver: zodResolver(schema),
